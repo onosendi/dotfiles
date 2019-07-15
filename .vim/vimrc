@@ -6,8 +6,6 @@
 let mapleader = " "              " Assign map leader.
 set nocompatible                 " Use Vim settings, rather than Vi.
 set encoding=utf8                " Set encoding.
-colorscheme jellybeans           " Colorscheme.
-set t_md=                        " Disable bold colors
 set autoread                     " Auto read when file is changed externally.
 set history=200                  " Number of lines of history to save.
 set ruler                        " Always show the cursor's position.
@@ -38,6 +36,10 @@ autocmd BufReadPost *
     \ exe "normal! g`\"" |
     \ endif
 
+" Colors ---------------------------------------------------------------------
+colorscheme jellybeans           " Colorscheme.
+set t_md=                        " Disable bold colors
+highlight LineNr ctermfg=white   " Color line numbers
 
 " Status line ----------------------------------------------------------------
 set laststatus=2                 " Always show the status line.
