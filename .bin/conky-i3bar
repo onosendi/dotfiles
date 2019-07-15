@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# Wrapper script for i3wm and conky
+#
+# To obtain this output with conky we have to use it in combination with a
+# short script. The script will write down the "fixed" part of the 
+# output (first and second line), then it will call conky. It will be conky's
+# duty to write each of the "instances".
+
+# Send the header so that i3bar knows we want to use JSON
+echo '{"version":1}'
+
+# Begin the endless array
+echo '['
+
+# Send an empty first array of blocks to make the loop simpler
+echo '[],'
+
+# Send blocks with information forever
+exec conky -c $HOME/.config/i3/conkyrc
