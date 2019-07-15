@@ -1,0 +1,8 @@
+[user]
+	email = onosendi@protonmail.com
+	name = Daniel Lindegren
+[core]
+	editor = vim
+[alias]
+	st = status
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
