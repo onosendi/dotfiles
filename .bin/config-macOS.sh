@@ -15,7 +15,7 @@ EOM
 }
 
 # Display help if no options are specified.
-[[ $# -eq 0 ]] && usage && exit 1
+[[ $# -eq 0 ]] && usage && exit 2
 
 # Loop through options and set variables accordingly.
 while getopts ":adh-:" arg;
@@ -26,12 +26,12 @@ do
                 all) all=true;;
                 dock) dock=true;;
                 help) usage && exit 0;;
-                *) usage && exit 1;;
+                *) usage && exit 2;;
             esac;;
         a) all=true;;
         d) dock=true;;
         h) usage && exit 0;;
-        \?) usage && exit 1;;
+        \?) usage && exit 2;;
     esac
 done
 
