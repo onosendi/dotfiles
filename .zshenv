@@ -3,6 +3,6 @@
 #
 
 
-export PATH="${PATH}:/Users/onosendi/.bin:/Users/onosendi/.android-sdk/platform-tools:/opt/local/bin"
+export PATH="${PATH}:/Users/onosendi/.bin:/Users/onosendi/.android-sdk/platform-tools:/usr/local/sbin"
 export TERM="xterm-color"
 export CLICOLOR="ANSI"
