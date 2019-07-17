@@ -41,17 +41,35 @@ done
 configure_dock() {
     echo "Configuring dock."
 
-    # Set icon size in dock.
-    defaults write com.apple.dock tilesize -int 35
-
-    # Show indicators for open applications in the dock.
-    defaults write com.apple.dock show-process-indicators -bool true
+    # Autohide the dock.
+    defaults write com.apple.dock autohide -bool true
 
     # Change autohide dock delay.
     defaults write com.apple.dock autohide-delay -float 0
 
-    # No animation when showing/hiding the dock.
+    # Animation when showing/hiding the dock.
     defaults write com.apple.dock autohide-time-modifier -float 0
+
+    # Changes to items in the dock.
+    defaults write com.apple.dock contents-immutable -bool true
+
+    # Magnification.
+    defaults write com.apple.dock magnification -bool false
+
+    # Minimize application into it's icon.
+    defaults write com.apple.dock minimize-to-application -bool true
+    
+    # Show indicators for open applications in the dock.
+    defaults write com.apple.dock show-process-indicators -bool true
+
+    # Show recently launched applications.
+    defaults write com.apple.dock show-recents -bool false
+
+    # Prevent changing the dock's size.
+    defaults write com.apple.dock size-immutable -bool false
+
+    # Set icon size in dock.
+    defaults write com.apple.dock tilesize -int 35
 
     # Restart the dock.
     killall Dock
