@@ -82,8 +82,8 @@ nnoremap <C-H> <C-W><C-H>
 " Set wrapping for mutt and text documents.
 au BufNewFile,BufRead *.txt,/tmp/mutt-* set textwidth=0 wrap linebreak
 
-" Set indentation for HTML.
-au BufNewFile,BufRead *.php,*.html,*.css set 
+" Set indentation for these file types.
+au BufNewFile,BufRead *.php,*.html,*.css,*.sh set 
     \ tabstop=2
     \ softtabstop=2
     \ shiftwidth=2
