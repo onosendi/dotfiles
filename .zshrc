@@ -17,3 +17,15 @@ alias gta="git add"
 alias gtc="git commit"
 alias gtf="git fetch"
 alias gtl="git log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short"
+
+##
+# grml-zsh-config
+#
+
+# Git information
+autoload -U colors && colors
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' unstagedstr '!'
+zstyle ':vcs_info:*' stagedstr '+'
+zstyle ':vcs_info:git*' formats "%{${fg[magenta]}%}[%{${fg[green]}%}%b%{${fg[yellow]}%}%m%u%c%{${fg[magenta]}%}]%{$reset_color%} "
