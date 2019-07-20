@@ -5,16 +5,22 @@
 URxvt.iso14755: off
 URxvt.iso14755_52: off
 URxvt.depth: 32
-
 URxvt.externalBorder: 0
 URxvt.internalBorder: 20
-
 URxvt.scrollBar: false
-
 URxvt.cursorBlink: false
 URxvt.cursorUnderline: true
-
 URxvt.pointerBlank: false
+
+Xft.dpi: 180
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
+Xcursor.size: 16
 
 
 ! Fonts ----------------------------------------------------------------------
@@ -33,7 +39,6 @@ URxvt.matcher.button: 1
 *.foreground:   #d0d0d0
 *.background:   #151515
 *.cursorColor:  #ffffff
-Xcursor.size: 16
 
 ! black
 *.color0:       #151515
