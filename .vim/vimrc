@@ -39,7 +39,7 @@ autocmd BufReadPost *
 " Colors ---------------------------------------------------------------------
 colorscheme jellybeans           " Colorscheme.
 set t_md=                        " Disable bold colors
-highlight LineNr ctermfg=white   " Color line numbers
+" highlight LineNr ctermfg=white   " Color line numbers
 
 " Status line ----------------------------------------------------------------
 set laststatus=2                 " Always show the status line.
