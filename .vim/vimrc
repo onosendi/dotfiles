@@ -37,7 +37,7 @@ autocmd BufReadPost *
     \ endif
 
 " Colors ---------------------------------------------------------------------
-colorscheme jellybeans           " Colorscheme.
+colorscheme atom-dark-256           " Colorscheme.
 set t_md=                        " Disable bold colors
 " highlight LineNr ctermfg=white   " Color line numbers
 
