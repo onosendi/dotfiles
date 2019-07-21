@@ -6,7 +6,7 @@
 let mapleader = " "              " Assign map leader.
 set nocompatible                 " Use Vim settings, rather than Vi.
 set encoding=utf8                " Set encoding.
-colorscheme jellybeans           " Colorscheme.
+colorscheme atom-dark-256        " Colorscheme.
 set t_md=                        " Disable bold colors
 set autoread                     " Auto read when file is changed externally.
 set history=200                  " Number of lines of history to save.
@@ -83,7 +83,7 @@ nnoremap <C-H> <C-W><C-H>
 au BufNewFile,BufRead *.txt,/tmp/mutt-* set textwidth=0 wrap linebreak
 
 " Set indentation for these file types.
-au BufNewFile,BufRead *.php,*.html,*.css,*.sh set 
+au BufNewFile,BufRead *.php,*.html,*.css,*.sh,*.js set 
     \ tabstop=2
     \ softtabstop=2
     \ shiftwidth=2
