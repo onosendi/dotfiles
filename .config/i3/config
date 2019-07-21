@@ -33,7 +33,7 @@ floating_modifier $mod
 bindsym $mod+Return exec urxvtc
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym Mod1+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+p exec dmenu_run -b -fn "Dejavu Sans Mono-10"
