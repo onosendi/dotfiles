@@ -22,7 +22,6 @@ let loaded_matchparen = 1        " Turn off parenthesis match highlighting.
 set fileformats=unix,mac,dos     " Standard filetypes.
 set nofoldenable                 " Do not fold code.
 syntax on                        " Enable syntax highlighting.
-highlight Normal ctermbg=none    " Make vim background transparent.
 highlight NonText ctermbg=none   " Help make other 'nothing exist' region transparent. 
 filetype on                      " Enable filetype detection.
 filetype plugin on               " Enable filetype plugin.
