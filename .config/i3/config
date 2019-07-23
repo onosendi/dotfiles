@@ -212,6 +212,9 @@ assign [class="Firefox"] $ws1
 # Hide titlebars
 for_window [class="^.*"] border pixel 1
 
+# Don't focus windows with mouse
+focus_follows_mouse no
+
 ##
 # Gaps
 #
