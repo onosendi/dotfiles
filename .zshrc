@@ -26,5 +26,12 @@ zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr '!'
 zstyle ':vcs_info:*' stagedstr '+'
-zstyle ':vcs_info:git*' formats "%{${fg[blue]}%}[%{${fg[white]}%}%b%{${fg_bold[red]}%}%m%u%c%{${fg[blue]}%}]%{$reset_color%} "
-zstyle ':prompt:grml:left:setup' items rc change-root path vcs percent
+zstyle ':vcs_info:git*' formats "%{${fg[white]}%}[%{${fg[green]}%}%b%{${fg[yellow]}%}%m%u%c%{$reset_color%}%{${fg[white]}%}]%{$reset_color%} "
+
+source /usr/bin/virtualenvwrapper.sh
+function virtual_env_prompt () {
+  REPLY=${VIRTUAL_ENV+(${VIRTUAL_ENV:t}) }
+}
+grml_theme_add_token virtual-env -f virtual_env_prompt '%F{blue}' '%f'
+
+zstyle ':prompt:grml:left:setup' items rc change-root path virtual-env vcs percent
