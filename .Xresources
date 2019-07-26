@@ -37,7 +37,7 @@ URxvt.matcher.button: 1
 
 ! Colors ---------------------------------------------------------------------
 *.foreground:   #d0d0d0
-*.background:   #151515
+*.background:   #1c1c1c
 *.cursorColor:  #ffffff
 
 ! black
