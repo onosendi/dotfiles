@@ -6,7 +6,7 @@
 let mapleader = " "              " Assign map leader.
 set nocompatible                 " Use Vim settings, rather than Vi.
 set encoding=utf8                " Set encoding.
-colorscheme gruvbox              " Colorscheme.
+colorscheme zenburn              " Colorscheme.
 set t_md=                        " Disable bold colors
 set autoread                     " Auto read when file is changed externally.
 set history=200                  " Number of lines of history to save.
@@ -42,7 +42,7 @@ autocmd BufReadPost *
 set laststatus=2                 " Always show the status line.
 
 " How the status line should be displayed.
-" hi StatusLine ctermbg=none ctermfg=white
+" hi StatusLine ctermbg=234 ctermfg=white
 
 set statusline=\
     \ %F%m%r%h\ %w\ \
