@@ -37,15 +37,15 @@ autocmd BufReadPost *
     \ endif
 
 " Colors ---------------------------------------------------------------------
-colorscheme atom-dark-256           " Colorscheme.
-set t_md=                        " Disable bold colors
-" highlight LineNr ctermfg=white   " Color line numbers
+colorscheme gruvbox                " Colorscheme.
+set t_md=                          " Disable bold colors
+hi Normal ctermbg=NONE             " Use iterm2 background
 
 " Status line ----------------------------------------------------------------
 set laststatus=2                 " Always show the status line.
 
 " How the status line should be displayed.
-hi StatusLine ctermbg=none ctermfg=white
+" hi StatusLine ctermbg=none ctermfg=white
 
 set statusline=\
     \ %F%m%r%h\ %w\ \
