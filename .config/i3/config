@@ -171,12 +171,13 @@ bar {
     strip_workspace_numbers yes
 
     colors {
-        background #000000
-        separator #000000
+        background $black
+        separator $black
 
         #                   Border       Background       Text
-        focused_workspace   $darkgreen   $darkgreen       $black
-        inactive_workspace  $black       $black           $grey
+        focused_workspace   $red         $red             $white
+        inactive_workspace  $black       $black           $white
+        urgent_workspace    $darkred     $darkred         $white
     }
 }
 
@@ -231,8 +232,7 @@ focus_follows_mouse no
 ##
 # Gaps
 #
-smart_gaps on
-gaps inner 10
+gaps inner 8
 gaps outer 0
 
 ##

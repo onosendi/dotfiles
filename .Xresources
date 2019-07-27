@@ -1,7 +1,7 @@
 !
 ! .Xresources
 !
-#include ".Xresources.d/colors/zenburn"
+#include ".Xresources.d/colors/gruvbox"
 
 URxvt.iso14755: off
 URxvt.iso14755_52: off

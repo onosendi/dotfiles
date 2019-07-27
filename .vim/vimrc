@@ -6,7 +6,7 @@
 let mapleader = " "              " Assign map leader.
 set nocompatible                 " Use Vim settings, rather than Vi.
 set encoding=utf8                " Set encoding.
-colorscheme zenburn              " Colorscheme.
+colorscheme gruvbox              " Colorscheme.
 set t_md=                        " Disable bold colors
 set autoread                     " Auto read when file is changed externally.
 set history=200                  " Number of lines of history to save.
