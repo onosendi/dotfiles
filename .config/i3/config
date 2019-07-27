@@ -175,8 +175,8 @@ bar {
         separator #000000
 
         #                   Border       Background       Text
-        focused_workspace   $darkblue    $darkblue        $white
-        inactive_workspace  $black       $black           $darkgrey
+        focused_workspace   $darkgreen   $darkgreen       $black
+        inactive_workspace  $black       $black           $grey
     }
 }
 
@@ -209,7 +209,7 @@ set_from_resource $white i3wm.color15 #ebdbb2
 
 # Window colors
 #                         Border       Background   Text         Indicator  Child Border
-client.focused            $darkblue    $black       $darkgreen   $blue      $darkblue
+client.focused            $darkgreen   $black       $darkgreen   $green     $darkgreen
 client.focused_inactive   $black       $black       $black       $black     $black
 
 client.background #ffffff

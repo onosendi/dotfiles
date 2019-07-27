@@ -35,13 +35,13 @@ conky.config = {
 
 conky.text = [[
 [
-    {"full_text":"", "color":"\#a89984"},
-    {"full_text":"${time %a %d %B %H:%M}  ", "color":"\#ebdbb2"},
+    {"full_text":"", "color":"\#ffd79b"},
+    {"full_text":"${time %a %d %B %H:%M}  ", "color":"\#d1d7d7"},
 
-    {"full_text":"", "color":"\#a89984"},
-    {"full_text":"${fs_used_perc /}%  ", "color":"\#ebdbb2"},
+    {"full_text":"", "color":"\#ffd79b"},
+    {"full_text":"${fs_used_perc /}%  ", "color":"\#d1d7d7"},
     
-    {"full_text":"", "color":"\#a89984"},
-    {"full_text":"${battery_percent}%  ", "color":"\#ebdbb2"}
+    {"full_text":"", "color":"\#ffd79b"},
+    {"full_text":"${battery_percent}%  ", "color":"\#d1d7d7"}
 ],
 ]];
