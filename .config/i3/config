@@ -35,8 +35,11 @@ bindsym $mod+Return exec urxvtc
 # kill focused window
 bindsym Mod1+Shift+q kill
 
+# Start rofi
+bindsym $mod+d exec "rofi -modi drun,run -show drun -sidebar-mode"
+bindsym $mod+Tab exec "rofi -show window"
+
 # start dmenu (a program launcher)
-bindsym $mod+d exec rofi -show run
 #bindsym $mod+d exec dmenu_run -b -fn "Dejavu Sans Mono-10" -nb "$black" -nf "$white" -sb "$yellow" -sf "$black"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
