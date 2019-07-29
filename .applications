@@ -1,4 +1,5 @@
 boost
+bspwm
 chromium
 conky
 dmenu
@@ -23,14 +24,17 @@ rxvt-unicode
 scrot
 siege
 snapper
+sxhkd
 taglib
 ttf-font-awesome
 ttf-ubuntu-font-family
 vim
 virtualbox-guest-utils
+weechat
 wget
 whois
 xclip
 xorg-server
 xorg-xinit
+xorg-xprop
 youtube-dl
