@@ -33,7 +33,7 @@ floating_modifier $mod
 bindsym $mod+Return exec urxvtc
 
 # kill focused window
-bindsym Mod1+Shift+q kill
+bindsym $mod+Shift+q kill
 
 # Start rofi
 bindsym $mod+d exec "rofi -modi drun,run -show drun -sidebar-mode"
