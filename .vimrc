@@ -89,6 +89,9 @@ au BufNewFile,BufRead *.php,*.html,*.css,*.sh,*.js set
     \ softtabstop=2
     \ shiftwidth=2
 
+" Force CSS syntax.
+au BufNewFile,BufRead *.rasi setf css
+
 " Automatically wrap text at 79 characters.
 au BufNewFile,BufRead *.py set textwidth=79
 
