@@ -1,0 +1,120 @@
+[colors]
+black = ${xrdb:color0:#282828}
+darkgrey = ${xrdb:color8:#928374}
+darkred = ${xrdb:color1:#cc241d}
+red = ${xrdb:color9:#fb4934}
+darkgreen = ${xrdb:color2:#98971a}
+green = ${xrdb:color10:#b8bb26}
+darkyellow = ${xrdb:color3:#d79921}
+yellow = ${xrdb:color11:#fabd2f}
+darkblue = ${xrdb:color4:#458588}
+blue = ${xrdb:color12:#83a598}
+darkmagenta = ${xrdb:color5:#b16286}
+magenta = ${xrdb:color13:#d3869b}
+darkcyan = ${xrdb:color6:#689d6a}
+cyan = ${xrdb:color14:#8ec07c}
+lightgrey = ${xrdb:color7:#a89984}
+white = ${xrdb:color15:#ebdbb2}
+altgrey = #555555
+
+[bar/main]
+width = 99.4%
+height = 42
+offset-x = 0.3%
+offset-y = 0
+radius = 0
+fixed-center = false
+
+background = ${colors.black}
+foreground = ${colors.white}
+
+line-size = 2
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = "Dejavu Sans Mono:pixelsize=18;5"
+font-1 = "FontAwesome5Free:pixelsize=18;3"
+font-2 = "FontAwesome5Free:style=Solid:pixelsize=18;3"
+
+modules-left = bspwm
+modules-center = 
+modules-right = filesystem battery date time
+
+tray-position = right
+tray-padding = 2
+tray-maxsize = 25
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %index%
+label-focused-background = ${colors.red}
+label-focused-foreground = ${colors.white}
+label-focused-underline = ${colors.red}
+label-focused-padding = 1
+
+label-occupied = %index%
+label-occupied-foreground = ${colors.white}
+label-occupied-padding = 1
+
+label-urgent = %index%!
+label-urgent-foreground = ${colors.red}
+label-urgent-padding = 1
+
+label-empty = %index%
+label-empty-foreground = ${colors.altgrey}
+label-empty-padding = 1
+
+[module/filesystem]
+type = internal/fs
+internal = 25
+mount-0 = /
+label-mounted = %{F#8ec07c}%{F-} %percentage_used%%
+
+[module/date]
+type = internal/date
+date = "%a %d %B"
+format-prefix-foreground = ${colors.darkyellow}
+format-prefix = " "
+
+[module/time]
+type = internal/date
+interval = 1
+date = %H:%M
+format-prefix-foreground = ${colors.blue}
+format-prefix = " "
+
+[module/battery]
+type = internal/battery
+battery = BAT1
+adapter = ACAD
+full-at = 98
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.darkgreen}
+
+format-charging-prefix = " "
+format-charging-prefix-foreground = ${colors.darkgreen}
+
+format-discharging-prefix = " "
+format-discharging-prefix-foreground = "${colors.darkgreen}"
+
+ramp-capacity-0 = zero
+ramp-capacity-1 = one
+ramp-capacity-2 = two
+ramp-capacity-foreground = ${colors.red}
+
+[global/wm]
+margin-bottom = 0
+margin-top = 0
