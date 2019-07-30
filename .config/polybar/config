@@ -1,3 +1,5 @@
+; vim:ft=dosini
+
 [colors]
 black = ${xrdb:color0:#282828}
 darkgrey = ${xrdb:color8:#928374}
