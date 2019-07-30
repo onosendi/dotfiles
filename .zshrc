@@ -9,7 +9,9 @@ alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias neomutt="cd ~/Downloads && /usr/bin/neomutt"
 
 # Set keyboard repeat rate/delay
-xset r rate 250 30
+if [ $DISPLAY ]; then
+    xset r rate 250 30
+fi
 
 # Fix terminal colors for gruvbox.
 source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
