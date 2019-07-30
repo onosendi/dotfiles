@@ -171,7 +171,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
     position top
-    status_command ~/.bin/conky-i3bar
+    status_command ~/.config/conky/conky-i3bar
     strip_workspace_numbers yes
 
     colors {
