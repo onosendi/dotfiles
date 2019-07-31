@@ -48,11 +48,11 @@ font-2 = "FontAwesome5Free:style=Solid:pixelsize=18;3"
 
 modules-left = bspwm
 modules-center = 
-modules-right = filesystem battery date time
+modules-right = cpu filesystem battery date time
 
 tray-position = right
 tray-padding = 2
-tray-maxsize = 25
+tray-maxsize = 28
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -116,6 +116,13 @@ ramp-capacity-0 = zero
 ramp-capacity-1 = one
 ramp-capacity-2 = two
 ramp-capacity-foreground = ${colors.red}
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+label = " %percentage:1%%"
+format-prefix = ""
+format-prefix-foreground = ${colors.darkgrey}
 
 [global/wm]
 margin-bottom = 0
