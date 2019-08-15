@@ -84,7 +84,7 @@ nnoremap <C-H> <C-W><C-H>
 au BufNewFile,BufRead *.txt,/tmp/mutt-* set textwidth=0 wrap linebreak
 
 " Set indentation for these file types.
-au BufNewFile,BufRead *.php,*.html,*.css,*.sh,*.js set 
+au BufNewFile,BufRead *.php,*.html,*.css,*.scss,*.sh,*.js set 
     \ tabstop=2
     \ softtabstop=2
     \ shiftwidth=2
