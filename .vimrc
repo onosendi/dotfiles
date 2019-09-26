@@ -11,8 +11,7 @@ set t_md=                        " Disable bold colors
 set autoread                     " Auto read when file is changed externally.
 set history=200                  " Number of lines of history to save.
 set ruler                        " Always show the cursor's position.
-set number                       " Show line numbers.
-set relativenumber               " Show numbers relative to cursor position.
+set number relativenumber        " Hybrid line number and relative numbers.
 set cmdheight=1                  " Hiehgt of the command bar.
 set noswapfile                   " Do not create swap file.
 set nobackup                     " Do not backup.
@@ -70,14 +69,25 @@ set whichwrap+=<,>,h,l,[,]      " Wrap and beginning and end of lines. (< > are
                                 " cursor keys in insert mode).
 
 " Key bindings ----------------------------------------------------------------
-map <silent> <leader><cr> :let @/=""<cr>   " Disable search highlighting.
-map <C-n> :NERDTreeToggle<CR>              " Open NERDTree
+noremap <C-n> :NERDTreeToggle<cr>
+noremap <silent> <leader>c :let @/=""<cr>
+noremap <silent><leader>w :w!<cr>
+noremap <silent><leader>q :q<cr>
 
 " Navigate split view via :sv <filename> or :vs <filename>.
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+function! g:ToggleNuMode()
+  if &rnu == 1
+      set number norelativenumber
+  else
+     set number relativenumber
+  endif
+endfunction
+nnoremap <silent><leader>l :call g:ToggleNuMode()<cr>
 
 " Filetypes -------------------------------------------------------------------
 
