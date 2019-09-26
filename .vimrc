@@ -12,6 +12,7 @@ set autoread                     " Auto read when file is changed externally.
 set history=200                  " Number of lines of history to save.
 set ruler                        " Always show the cursor's position.
 set number                       " Show line numbers.
+set relativenumber               " Show numbers relative to cursor position.
 set cmdheight=1                  " Hiehgt of the command bar.
 set noswapfile                   " Do not create swap file.
 set nobackup                     " Do not backup.
