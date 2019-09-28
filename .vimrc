@@ -28,6 +28,13 @@ let loaded_matchparen = 1        " Turn off parenthesis match highlighting.
 set nofoldenable                 " Do not fold code.
 set cmdheight=1                  " Height of the command bar.
 
+" macOS specific.
+if has("unix")
+  if system("echo -n \"$(uname -s)\"") == "Darwin"
+    highlight Normal ctermbg=none
+  endif
+endif
+
 
 " Plugins ---------------------------------------------------------------------
 
