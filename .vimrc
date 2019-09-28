@@ -1,6 +1,4 @@
-"
-" ~/.vimrc
-"
+" Author: Daniel Lindegren
 
 " General ---------------------------------------------------------------------
 let mapleader = " "              " Assign map leader.
@@ -69,38 +67,28 @@ set whichwrap+=<,>,h,l,[,]      " Wrap and beginning and end of lines. (< > are
                                 " normal and visual mode, and [ ] are the
                                 " cursor keys in insert mode).
 
-" Key bindings ----------------------------------------------------------------
-let g:user_emmet_leader_key="<C-Y>,"  " Assign emmet leader key. 
+" Filetypes -------------------------------------------------------------------
+
+autocmd BufNewFile,BufRead *.rasi setf css
+
+" Custom Key Bindings ---------------------------------------------------------
 
 noremap <C-n> :NERDTreeToggle<cr>
 noremap <silent> <leader>c :let @/=""<cr>
 noremap <silent><leader>w :w!<cr>
 noremap <silent><leader>q :q<cr>
 
-" Navigate split view via :sv <filename> or :vs <filename>.
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-function! g:ToggleMode()
+function! g:ToggleNumberMode()
   if &rnu == 1
       set number norelativenumber
   else
      set number relativenumber
   endif
 endfunction
-nnoremap <silent><leader>l :call g:ToggleNuMode()<cr>
 
-" Filetypes -------------------------------------------------------------------
-
-" Force CSS syntax.
-au BufNewFile,BufRead *.rasi setf css
-
-" Python ----------------------------------------------------------------------
-
-" Make python code look pretty.
-let python_hightlight_all = 1
-
-" Decorate these keywords.
-au FileType python syn keyword pythonDecorator True None False self
+nnoremap <silent><leader>l :call g:ToggleNumberMode()<cr>
