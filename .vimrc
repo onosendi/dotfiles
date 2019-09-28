@@ -12,11 +12,13 @@ set autoread                     " Auto read when file is changed externally.
 set history=200                  " Number of lines of history to save.
 set ruler                        " Always show the cursor's position.
 set number relativenumber        " Hybrid line number and relative numbers.
-set cmdheight=1                  " Hiehgt of the command bar.
+set cmdheight=1                  " Height of the command bar.
 set noswapfile                   " Do not create swap file.
 set nobackup                     " Do not backup.
 set nowritebackup                " Prevent automatic write backup before
                                  " overwriting file.
+set autoindent                   " Auto indent for any file type.
+set backspace=indent,eol,start
 set lazyredraw                   " Don't redraw while exdecuting macros.
 set magic                        " For regular expressions.
 let loaded_matchparen = 1        " Turn off parenthesis match highlighting.
@@ -55,12 +57,11 @@ set hlsearch                    " Highlight search results.
 set incsearch                   " Search as you type.
 
 " Default Tabs and wrapping ---------------------------------------------------
-set smarttab                    " Be smart when using tabs.
 set expandtab                   " Use spaces instead of tabs.
-set tabstop=4                   " Number of spaces for each tab.
-set shiftwidth=4                " How many columns of text is indented with the
+set tabstop=2                   " Number of spaces for each tab.
+set shiftwidth=2                " How many columns of text is indented with the
                                 " reindent operations (<< and >>).
-set softtabstop=4               " How many columns vim uses when you hit Tab in
+set softtabstop=2               " How many columns vim uses when you hit Tab in
                                 " insert mode.
 set nowrap                      " Do not wrap lines.
 set whichwrap+=<,>,h,l,[,]      " Wrap and beginning and end of lines. (< > are
@@ -69,6 +70,8 @@ set whichwrap+=<,>,h,l,[,]      " Wrap and beginning and end of lines. (< > are
                                 " cursor keys in insert mode).
 
 " Key bindings ----------------------------------------------------------------
+let g:user_emmet_leader_key="<C-Y>,"  " Assign emmet leader key. 
+
 noremap <C-n> :NERDTreeToggle<cr>
 noremap <silent> <leader>c :let @/=""<cr>
 noremap <silent><leader>w :w!<cr>
@@ -80,7 +83,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-function! g:ToggleNuMode()
+function! g:ToggleMode()
   if &rnu == 1
       set number norelativenumber
   else
@@ -91,20 +94,10 @@ nnoremap <silent><leader>l :call g:ToggleNuMode()<cr>
 
 " Filetypes -------------------------------------------------------------------
 
-" Set wrapping for mutt and text documents.
-au BufNewFile,BufRead *.txt,/tmp/mutt-* set textwidth=0 wrap linebreak
-
-" Set indentation for these file types.
-au BufNewFile,BufRead *.php,*.html,*.css,*.scss,*.sh,*.js set 
-    \ tabstop=2
-    \ softtabstop=2
-    \ shiftwidth=2
-
 " Force CSS syntax.
 au BufNewFile,BufRead *.rasi setf css
 
-" Automatically wrap text at 79 characters.
-au BufNewFile,BufRead *.py set textwidth=79
+" Python ----------------------------------------------------------------------
 
 " Make python code look pretty.
 let python_hightlight_all = 1
