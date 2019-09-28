@@ -23,10 +23,11 @@ colorscheme gruvbox              " Colorscheme.
 set t_md=                        " Disable bold colors
 set ruler                        " Always show the cursor's position.
 set number relativenumber        " Hybrid line number and relative numbers.
-highlight NonText ctermbg=none   " Help make other 'nothing exist' region
 let loaded_matchparen = 1        " Turn off parenthesis match highlighting.
 set nofoldenable                 " Do not fold code.
 set cmdheight=1                  " Height of the command bar.
+highlight NonText ctermbg=none
+highlight CursorLineNr ctermbg=none
 
 " macOS specific.
 if has("unix")
