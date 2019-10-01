@@ -108,6 +108,7 @@ noremap <silent> <leader>c :let @/=""<cr>
 noremap <silent><leader>w :w!<cr>
 noremap <silent><leader>q :q<cr>
 noremap <silent><leader>l :call g:ToggleNumberMode()<cr>
+let g:user_emmet_leader_key='<C-e>'
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
