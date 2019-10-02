@@ -113,7 +113,7 @@ nnoremap <C-H> <C-W><C-H>
 
 " Load plugins ----------------------------------------------------------------
 
-set runtimepath^=~/.vim/bundle/nerdtree
-set runtimepath^=~/.vim/bundle/emmet-vim
-set runtimepath^=~/.vim/bundle/vim-flake8
-set runtimepath^=~/.vim/bundle/vim-surround
+packadd nerdtree
+packadd emmet-vim
+packadd vim-flake8
+packadd vim-surround
