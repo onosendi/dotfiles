@@ -70,13 +70,6 @@ set whichwrap+=<,>,h,l,[,]      " Wrap and beginning and end of lines. (< > are
                                 " cursor keys in insert mode).
 
 
-" Netrw -----------------------------------------------------------------------
-let g:netrw_liststyle = 3
-let g:netrw_banner = 0          " Hide banner.
-let g:netrw_browse_split = 1    " Open files in previous window.
-let g:netrw_winsize = 30        " Width in percent of netrw.
-
-
 " Filetypes -------------------------------------------------------------------
 
 filetype on                      " Enable filetype detection.
@@ -105,7 +98,7 @@ endfunction
 
 " Custom Key Bindings ---------------------------------------------------------
 
-noremap <C-n> :Vexplore<cr>
+map <C-n> :NERDTreeToggle<CR>
 noremap <silent> <leader>c :let @/=""<cr>
 noremap <silent><leader>w :w!<cr>
 noremap <silent><leader>q :q<cr>
@@ -119,7 +112,8 @@ nnoremap <C-H> <C-W><C-H>
 
 
 " Load plugins ----------------------------------------------------------------
-"
+
+set runtimepath^=~/.vim/bundle/nerdtree
 set runtimepath^=~/.vim/bundle/emmet-vim
 set runtimepath^=~/.vim/bundle/vim-flake8
 set runtimepath^=~/.vim/bundle/vim-surround
