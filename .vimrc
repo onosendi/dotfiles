@@ -37,12 +37,6 @@ if has("unix")
 endif
 
 
-" Plugins ---------------------------------------------------------------------
-
-execute pathogen#infect()
-execute pathogen#helptags()
-
-
 " Status line -----------------------------------------------------------------
 
 set laststatus=2                 " Always show the status line.
@@ -114,3 +108,10 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+
+" Load plugins ----------------------------------------------------------------
+set runtimepath^=~/.vim/bundle/nerdtree
+set runtimepath^=~/.vim/bundle/emmet-vim
+set runtimepath^=~/.vim/bundle/vim-flake8
+set runtimepath^=~/.vim/bundle/vim-surround
