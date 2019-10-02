@@ -4,6 +4,7 @@ chromium
 cmake
 conky
 dmenu
+dos2unix
 feh
 firefox
 flake8
