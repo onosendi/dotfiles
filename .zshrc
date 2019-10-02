@@ -10,11 +10,11 @@ alias neomutt="cd ~/Downloads && /usr/bin/neomutt"
 
 # Set keyboard repeat rate/delay
 if [ $DISPLAY ]; then
-    xset r rate 250 30
+    xset r rate 5000 20
 fi
 
 # Fix terminal colors for gruvbox.
-source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
+source "$HOME/.bin/gruvbox_256palette.sh"
 
 # Git aliases
 alias gts="git status"
