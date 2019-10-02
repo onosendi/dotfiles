@@ -82,8 +82,6 @@ autocmd BufReadPost *
     \ exe "normal! g`\"" |
     \ endif
 
-let python_highlight_all = 1
-
 
 " Functions -------------------------------------------------------------------
 
