@@ -76,8 +76,6 @@ filetype on                      " Enable filetype detection.
 filetype plugin on               " Enable filetype plugin.
 filetype indent on               " Enable filetype plugin indenting.
 
-autocmd BufNewFile,BufRead *.rasi setf css
-
 " When opening a file, always jump to the last known cursor position.
 autocmd BufReadPost *
     \ if line("'\"") > 1 && line("'\"") <= line("$") |
