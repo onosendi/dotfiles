@@ -25,7 +25,7 @@ Xcursor.size: 16
 
 
 ! Fonts ----------------------------------------------------------------------
-URxvt.font: xft:Dejavu Sans Mono:size=9
+URxvt.font: xft:SF Mono:size=9:style=regular
 URxvt.allow_bold: false
 URxvt.letterSpace: -1
 
