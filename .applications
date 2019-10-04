@@ -19,9 +19,12 @@ keepass
 mariadb
 nextcloud-client
 nfs-utils
+nginx
 npm
 open-vm-tools
+otf-sfmono
 p7zip
+php-fpm
 polybar
 python-virtualenvwrapper
 rofi
@@ -34,6 +37,7 @@ snapper
 stress
 sxhkd
 taglib
+tree
 ttf-font-awesome
 ttf-opensans
 ttf-roboto
