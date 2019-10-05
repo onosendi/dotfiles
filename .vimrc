@@ -115,6 +115,7 @@ packadd nerdtree
 packadd emmet-vim
 packadd vim-flake8
 packadd vim-surround
+packadd vim-jinja
 
 
 " Emmet settings --------------------------------------------------------------
