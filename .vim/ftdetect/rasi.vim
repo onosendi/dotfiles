@@ -1,1 +1,1 @@
-setf css
+au BufRead,BufNewFile *.rasi set filetype=css
