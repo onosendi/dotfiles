@@ -1,5 +1,5 @@
+" Try setting filetype to typescript in ~/.vim/ftdetect/javascript.vim
+" instead.
+
 " syn keyword javaScriptForOperator of
 " syn keyword javaScriptIdentifier const
-
-" Try using typescript syntax instead
-setf typescript
