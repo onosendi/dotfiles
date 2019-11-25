@@ -1,9 +1,12 @@
+base
 boost
 bspwm
 chromium
 cmake
 conky
+dhcpcd
 dmenu
+docker
 dos2unix
 feh
 firefox
@@ -16,6 +19,10 @@ htop
 i3-gaps
 jq
 keepass
+linux
+linux-firmware
+man-db
+man-pages
 mariadb
 nextcloud-client
 nfs-utils
@@ -27,6 +34,7 @@ p7zip
 php-fpm
 polybar
 python-virtualenvwrapper
+redis
 rofi
 rsync
 rxvt-unicode
