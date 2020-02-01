@@ -41,10 +41,9 @@ endif
 " Status line -----------------------------------------------------------------
 
 set laststatus=2                 " Always show the status line.
-set statusline=\
-    \ %F%m%r%h\ %w\ \
-    \ CWD:\ %{getcwd()}\ \ \
-    \ Line:\ %l\ \ \ Column:\ %c
+set statusline=%t\ %m%r%h
+set statusline+=\ -\ %{getcwd()}
+set statusline+=%=\ %l/%L\ -\ %c
 
 
 " Searching -------------------------------------------------------------------
