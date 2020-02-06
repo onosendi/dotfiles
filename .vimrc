@@ -42,7 +42,7 @@ endif
 
 set laststatus=2                 " Always show the status line.
 set statusline=%t\ %m%r%h
-set statusline+=\ -\ %{getcwd()}
+set statusline+=\ -\ %{expand('%:p:h')} 
 set statusline+=%=\ %l/%L\ -\ %c
 
 
