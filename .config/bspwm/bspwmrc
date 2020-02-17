@@ -16,6 +16,7 @@ if [ "$(hostname)" == "desktop-arch" ]; then
   bspc monitor DP-3 -d 1 2 3
   bspc monitor DP-5 -d 4 5 6
   bspc monitor DP-2 -d 7 8 9
+  bspc desktop -f 1
   bspc rule -a Chromium desktop="^7"
   bspc rule -a Firefox desktop="^7"
   bspc rule -a KeePass2 desktop="^9"
@@ -35,6 +36,7 @@ bspc config borderless_monocle         true
 bspc config gapless_monocle            true
 
 bspc config automatic_scheme           longest_side
+bspc config pointer_follows_focus      true
 
 bspc config normal_border_color        \#282828
 bspc config active_border_color        \#282828
