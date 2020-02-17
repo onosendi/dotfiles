@@ -3,6 +3,9 @@
 !
 #include ".Xresources.d/colors/gruvbox"
 
+!
+! urxvt -----------------------------------------------------------------------
+!
 URxvt.iso14755: off
 URxvt.iso14755_52: off
 URxvt.depth: 32
@@ -13,6 +16,19 @@ URxvt.cursorBlink: false
 URxvt.cursorUnderline: true
 URxvt.pointerBlank: false
 
+! Fonts
+URxvt.font: xft:SF Mono:size=9:style=regular
+URxvt.allow_bold: false
+URxvt.letterSpace: -1
+
+! Plugins
+URxvt.perl-ext-common: matcher
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
+
+!
+! Xft -------------------------------------------------------------------------
+!
 Xft.dpi: 180
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
@@ -21,17 +37,7 @@ Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
 
+!
+! Cursor ----------------------------------------------------------------------
+!
 Xcursor.size: 16
-
-
-! Fonts ----------------------------------------------------------------------
-URxvt.font: xft:SF Mono:size=9:style=regular
-URxvt.allow_bold: false
-URxvt.letterSpace: -1
-
-
-! Plugins --------------------------------------------------------------------
-
-URxvt.perl-ext-common: matcher
-URxvt.url-launcher: /usr/bin/chromium
-URxvt.matcher.button: 1
