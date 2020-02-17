@@ -26,13 +26,13 @@ if [ "$(hostname)" == "desktop-arch" ]; then
   bspc monitor DP-2 -d 7 8 9
   bspc desktop -f 1
   bspc rule -a Chromium desktop="^7"
-  bspc rule -a Firefox desktop="^7"
+  bspc rule -a firefox desktop="^7"
   bspc rule -a KeePass2 desktop="^9"
 elif [ "$(hostname)" == "mbp-arch" ]; then
   sxhkd -c "$HOME/.config/sxhkd/mbp-arch-sxhkdrc" &
   bspc monitor -d I II III IV V VI VII VIII IX X
   bspc rule -a Chromium desktop="^1"
-  bspc rule -a Navigator desktop="^1"
+  bspc rule -a firefox desktop="^1"
   bspc rule -a KeePass2 desktop="^10"
 fi
 
