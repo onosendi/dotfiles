@@ -9,7 +9,8 @@ STARTUP=(\
 )
 
 for app in ${STARTUP[@]}; do
-  if [ ! -z "$(pidof $app)" ]; then
+  PID=$(pidof $app)
+  if [ ! -z $PID ]; then
     kill -9 $PID
   fi
 done
