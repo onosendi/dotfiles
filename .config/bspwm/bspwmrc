@@ -1,4 +1,11 @@
 #!/bin/sh
+killall -9 \
+  sxhkd \
+  unclutter \
+  urxvtd \
+  nextcloud \
+  polybar
+
 sxhkd &
 unclutter --timeout 1 &
 urxvtd -q -f
