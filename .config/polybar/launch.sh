@@ -8,8 +8,9 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Launch polybar
 if [ "$(hostname)" == "desktop-arch" ]; then
-  CONFIG_FILE="config-desktop-arch"
+  polybar --config="$HOME/.config/polybar/config-desktop-arch" --reload DP-3 &
+  polybar --config="$HOME/.config/polybar/config-desktop-arch" --reload DP-5 &
+  polybar --config="$HOME/.config/polybar/config-desktop-arch" --reload DP-2 &
 elif [ "$(hostname)" == "mbp-arch" ]; then
-  CONFIG_FILE="config-mbp-arch"
+  polybar --config="$HOME/.config/polybar/config-mbp-arch" --reload main &
 fi
-polybar --config="$HOME/.config/polybar/${CONFIG_FILE}" --reload main &

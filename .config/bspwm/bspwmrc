@@ -39,4 +39,3 @@ bspc config automatic_scheme           longest_side
 bspc config normal_border_color        \#282828
 bspc config active_border_color        \#b8bb26
 bspc config focused_border_color       \#b8bb26
-
