@@ -1,10 +1,18 @@
 #!/bin/bash
-killall -9 \
-  sxhkd \
-  unclutter \
-  urxvtd \
-  nextcloud \
+
+STARTUP=(\
+  sxhkd
+  unclutter
+  urxvtd
+  nextcloud
   polybar
+)
+
+for app in ${STARTUP[@]}; do
+  if [ ! -z "$(pidof $app)" ]; then
+    kill -9 $PID
+  fi
+done
 
 unclutter --timeout 1 &
 urxvtd -q -f
