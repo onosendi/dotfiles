@@ -30,6 +30,7 @@ if [ "$(hostname)" == "desktop-arch" ]; then
   bspc rule -a firefox desktop="^7"
   bspc rule -a KeePass2 desktop="^9"
 elif [ "$(hostname)" == "mbp-arch" ]; then
+  vmware-user
   sxhkd -c "$HOME/.config/sxhkd/mbp-arch-sxhkdrc" &
   bspc monitor -d I II III IV V VI VII VIII IX X
   bspc rule -a Chromium desktop="^1"
