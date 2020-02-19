@@ -8,9 +8,8 @@ super + Return
 
 # program launcher
 super + d
-    rofi -modi drun,run -show drun -sidebar-mode
+    rofi -config ~/.config/rofi/config-mbp-arch.rasi -modi drun,run -show drun -sidebar-mode
 	
-
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd

@@ -8,8 +8,7 @@ alt + Return
 
 # program launcher
 alt + d
-    rofi -modi drun,run -show drun -sidebar-mode
-	
+    rofi -config ~/.config/rofi/config-desktop-arch.rasi -modi drun,run -show drun -sidebar-mode
 
 # make sxhkd reload its configuration files:
 alt + Escape
