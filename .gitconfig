@@ -1,9 +1,9 @@
 [user]
-	email = onosendi@protonmail.com
-	name = Daniel Lindegren
+  email = onosendi@protonmail.com
+  name = Daniel Lindegren
 [core]
-	editor = vim
+  editor = vim
 [alias]
-	st = status
+  st = status
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   publish = push live master:master
