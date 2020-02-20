@@ -6,6 +6,7 @@ STARTUP=(\
   urxvtd
   nextcloud
   polybar
+  vmware-user
 )
 
 for app in ${STARTUP[@]}; do
