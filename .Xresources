@@ -17,7 +17,6 @@ URxvt.cursorUnderline: true
 URxvt.pointerBlank: false
 
 ! Fonts
-URxvt.font: xft:SF Mono:size=11:style=regular
 URxvt.allow_bold: false
 URxvt.letterSpace: -1
 
