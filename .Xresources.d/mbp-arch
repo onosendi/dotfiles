@@ -1,2 +1,2 @@
-URxvt.font: xft:SF Mono:size=11:style=regular
-Xft.dpi: 170
+URxvt.font: xft:SF Mono:size=10:style=regular
+Xft.dpi: 192
