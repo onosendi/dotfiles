@@ -16,13 +16,6 @@ fi
 # Fix terminal colors for gruvbox.
 source "$HOME/.bin/gruvbox_256palette.sh"
 
-# Git aliases
-alias gts="git status"
-alias gta="git add"
-alias gtc="git commit"
-alias gtf="git fetch"
-alias gtl="git log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short"
-
 ##
 # grml-zsh-config
 #
