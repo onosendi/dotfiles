@@ -18,7 +18,6 @@ for app in ${STARTUP[@]}; do
   fi
 done
 
-picom & # Window compositor
 feh --bg-tile $HOME/.config/ree-black-texture.jpg # Background image
 unclutter --timeout 1 & # Hide mouse arrow
 urxvtd -q -f # Daemonize urxvt
@@ -26,6 +25,7 @@ $HOME/.config/polybar/launch.sh # Launch Polybar
 nextcloud & # Launch Nextcloud
 
 if [ "$(hostname)" == "desktop-arch" ]; then
+  picom & # Window compositor
   sxhkd -c "$HOME/.config/sxhkd/desktop-arch-sxhkdrc" &
   bspc monitor DP-3 -d 1 2 3
   bspc monitor DP-5 -d 4 5 6
@@ -35,7 +35,7 @@ if [ "$(hostname)" == "desktop-arch" ]; then
   bspc rule -a firefox desktop="^7"
   bspc rule -a KeePass2 desktop="^9"
 elif [ "$(hostname)" == "mbp-arch" ]; then
-  vmware-user
+  vmware-user # For VMWare Fusion
   sxhkd -c "$HOME/.config/sxhkd/mbp-arch-sxhkdrc" &
   bspc monitor -d I II III IV V VI VII VIII IX X
   bspc rule -a Chromium desktop="^1"
