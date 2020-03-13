@@ -7,6 +7,8 @@ STARTUP=(\
   nextcloud
   polybar
   vmware-user
+  picom
+  feh
 )
 
 for app in ${STARTUP[@]}; do
@@ -16,10 +18,12 @@ for app in ${STARTUP[@]}; do
   fi
 done
 
-unclutter --timeout 1 &
-urxvtd -q -f
-$HOME/.config/polybar/launch.sh
-nextcloud &
+picom & # Window compositor
+feh --bg-tile $HOME/.config/ree-black-texture.jpg # Background image
+unclutter --timeout 1 & # Hide mouse arrow
+urxvtd -q -f # Daemonize urxvt
+$HOME/.config/polybar/launch.sh # Launch Polybar
+nextcloud & # Launch Nextcloud
 
 if [ "$(hostname)" == "desktop-arch" ]; then
   sxhkd -c "$HOME/.config/sxhkd/desktop-arch-sxhkdrc" &
@@ -49,6 +53,6 @@ bspc config gapless_monocle            true
 bspc config automatic_scheme           longest_side
 bspc config pointer_follows_focus      true
 
-bspc config normal_border_color        \#282828
-bspc config active_border_color        \#282828
+bspc config normal_border_color        \#000000
+bspc config active_border_color        \#000000
 bspc config focused_border_color       \#b8bb26
