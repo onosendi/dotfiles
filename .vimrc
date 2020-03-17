@@ -115,3 +115,5 @@ packadd emmet-vim
 packadd vim-flake8
 packadd vim-surround
 packadd vim-jinja
+packadd vim-jsx-pretty
+packadd vim-javascript

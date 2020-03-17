@@ -1,1 +1,1 @@
-au BufRead,BufNewFile *.js set filetype=typescript
+" au BufRead,BufNewFile *.js set filetype=typescript
