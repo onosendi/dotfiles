@@ -33,3 +33,6 @@ function virtual_env_prompt () {
 grml_theme_add_token virtual-env -f virtual_env_prompt '%F{white}' '%f'
 
 zstyle ':prompt:grml:left:setup' items rc change-root virtual-env path vcs percent
+
+# Use vi mode
+bindkey -v
