@@ -117,3 +117,24 @@ packadd vim-surround
 packadd vim-jinja
 packadd vim-jsx-pretty
 packadd vim-javascript
+
+
+" Emmet settings --------------------------------------------------------------
+
+let g:user_emmet_settings = {
+\  'html': {
+\    'snippets': {
+\      'html:5': "<!doctype html>\n"
+\              ."<html lang=\"en\">\n"
+\              ."<head>\n"
+\              ."  <meta charset=\"utf-8\">\n"
+\              ."  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
+\              ."  <meta name=\"description\" content=\"\">\n"
+\              ."  <title></title>\n"
+\              ."</head>\n"
+\              ."<body>\n"
+\              ."</body>\n"
+\              ."</html>",
+\    }
+\  }
+\}
