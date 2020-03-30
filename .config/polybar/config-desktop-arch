@@ -20,43 +20,43 @@ white = ${xrdb:color15:#ebdbb2}
 altgrey = #555555
 
 ; Left monitor.
-[bar/DP-3]
-monitor = DP-3
+[bar/DP-2]
+monitor = DP-2
 width = 99.2%
 offset-x = 0.4%
 offset-y = 0
 background = ${colors.black}
 modules-left = bspwm
-font-0 = "Dejavu Sans Mono:pixelsize=10;2"
+font-0 = "SF Mono:pixelsize=10;2"
 cursor-click = pointer
 
 ; Center monitor.
-[bar/DP-5]
-monitor = DP-5
+[bar/DP-1]
+monitor = DP-1
 width = 98.6%
 offset-x = 0.7%
 offset-y = 0
 background = ${colors.black}
-modules-left = bspwm
-font-0 = "Dejavu Sans Mono:pixelsize=10;2"
-
-; Right monitor.
-[bar/DP-2]
-monitor = DP-2
-width = 98.6%
-offset-x = 0.7%
-offset-y = 0
-background = ${colors.black}
-foreground = ${colors.white}
 modules-left = bspwm
 modules-right = cpu filesystem alsa date time
 module-margin-right = 2
 tray-position = right
 tray-maxsize = 15
 tray-padding = 10
-font-0 = "Dejavu Sans Mono:pixelsize=10;2"
+font-0 = "SF Mono:pixelsize=10;2"
 font-1 = "FontAwesome5Free:pixelsize=10;1"
 font-2 = "FontAwesome5Free:pixelsize=10;1"
+
+; Right monitor.
+[bar/DP-3]
+monitor = DP-3
+width = 98.6%
+offset-x = 0.7%
+offset-y = 0
+background = ${colors.black}
+foreground = ${colors.white}
+modules-left = bspwm
+font-0 = "SF Mono:pixelsize=10;2"
 
 [module/filesystem]
 type = internal/fs
