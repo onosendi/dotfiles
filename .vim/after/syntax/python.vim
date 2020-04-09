@@ -1,5 +1,6 @@
 syn keyword pythonException return
 syn keyword pythonDot self
+syn keyword pythonExceptions True False
 
 hi! link pythonInclude GruvboxAqua
 hi! link pythonImport GruvboxAqua
