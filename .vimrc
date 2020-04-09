@@ -117,6 +117,7 @@ packadd vim-surround
 packadd vim-jinja
 packadd vim-jsx-pretty
 packadd vim-javascript
+packadd vim-commentary
 
 
 " Emmet settings --------------------------------------------------------------
