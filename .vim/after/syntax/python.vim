@@ -5,9 +5,9 @@ syn keyword pythonSelf self
 hi! link pythonInclude GruvboxAqua
 hi! link pythonImport GruvboxAqua
 hi! link pythonStatement GruvboxAqua
-hi! link pythonFunction GruvboxYellow
+hi! link pythonFunction GruvboxBlue
 hi! link pythonBuiltin GruvboxPurple
 hi! link pythonNumber GruvboxPurple
 
-hi! link pythonBoolean GruvboxBlue
+hi! link pythonBoolean GruvboxYellow
 hi! link pythonSelf GruvboxOrange
