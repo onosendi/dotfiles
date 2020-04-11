@@ -33,8 +33,8 @@ cursor-click = pointer
 ; Center monitor.
 [bar/DP-1]
 monitor = DP-1
-width = 98.6%
-offset-x = 0.7%
+width = 99.8%
+offset-x = 0%
 offset-y = 0
 background = ${colors.black}
 modules-left = bspwm
@@ -50,8 +50,8 @@ font-2 = "FontAwesome5Free:pixelsize=10;1"
 ; Right monitor.
 [bar/DP-3]
 monitor = DP-3
-width = 98.6%
-offset-x = 0.7%
+width = 99%
+offset-x = 0.5%
 offset-y = 0
 background = ${colors.black}
 foreground = ${colors.white}
