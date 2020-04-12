@@ -7,7 +7,7 @@ STARTUP=(\
   nextcloud
   polybar
   vmware-user
-  picom
+  # picom
   feh
 )
 
@@ -25,15 +25,15 @@ $HOME/.config/polybar/launch.sh # Launch Polybar
 nextcloud & # Launch Nextcloud
 
 if [ "$(hostname)" == "desktop-arch" ]; then
-  picom & # Window compositor
+  # picom & # Window compositor
   sxhkd -c "$HOME/.config/sxhkd/desktop-arch-sxhkdrc" &
-  bspc monitor DP-2 -d 1 2 3
-  bspc monitor DP-1 -d 4 5 6 7
-  bspc monitor DP-3 -d 8 9 10
-  bspc desktop -f 4
+  bspc monitor DP-2 -d 1 2
+  bspc monitor DP-1 -d 3 4 5 6
+  bspc monitor DP-3 -d 7 8 9 10
+  bspc desktop -f 3
   bspc rule -a Chromium desktop="^1"
   bspc rule -a firefox desktop="^1"
-  bspc rule -a KeePass2 desktop="^7"
+  bspc rule -a KeePass2 desktop="^6"
 elif [ "$(hostname)" == "mbp-arch" ]; then
   vmware-user # For VMWare Fusion
   sxhkd -c "$HOME/.config/sxhkd/mbp-arch-sxhkdrc" &
