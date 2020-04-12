@@ -37,6 +37,10 @@ if has("unix")
   endif
 endif
 
+" Switch cursor on enter/leave insert mode
+autocmd InsertEnter * set cul
+autocmd InsertLeave * set nocul
+
 
 " Status line -----------------------------------------------------------------
 
