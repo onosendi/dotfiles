@@ -38,4 +38,4 @@ zstyle ':prompt:grml:left:setup' items rc change-root virtual-env path vcs perce
 bindkey -v
 
 # Setting fd as the default source for fzf
-export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden'
