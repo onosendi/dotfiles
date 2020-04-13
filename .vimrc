@@ -12,9 +12,11 @@ set noswapfile                   " Do not create swap file.
 set nobackup                     " Do not backup.
 set nowritebackup                " Prevent automatic write backup before
                                  " overwriting file.
+set hidden                       " Send buffer to memory.
 set lazyredraw                   " Don't redraw while exdecuting macros.
 set magic                        " For regular expressions.
 set fileformats=unix,mac,dos     " Standard filetypes.
+set wildmenu                     " Show file menu when tabbing.
 
 
 " UI --------------------------------------------------------------------------
@@ -31,15 +33,9 @@ highlight NonText ctermbg=none
 highlight CursorLineNr ctermbg=none
 
 " macOS specific.
-if has("unix")
-  if system("echo -n \"$(uname -s)\"") == "Darwin"
-    highlight Normal ctermbg=none
-  endif
+if has('mac')
+  highlight Normal ctermbg=none
 endif
-
-" Switch cursor on enter/leave insert mode
-" autocmd InsertEnter * set cul
-" autocmd InsertLeave * set nocul
 
 
 " Searching -------------------------------------------------------------------
@@ -48,6 +44,9 @@ set ignorecase                  " Ignore case when searching.
 set smartcase                   " When searching, try to be smart about cases.
 set hlsearch                    " Highlight search results.
 set incsearch                   " Search as you type.
+
+" Clear search results
+noremap <silent> <leader>c :let @/=""<cr> 
 
 
 " Default Tabs and wrapping ---------------------------------------------------
@@ -78,7 +77,9 @@ autocmd BufReadPost *
     \ endif
 
 
-" Functions -------------------------------------------------------------------
+" ToggleNumberMode ------------------------------------------------------------
+
+noremap <silent><leader>l :call g:ToggleNumberMode()<cr>
 
 function! g:ToggleNumberMode()
   if &rnu == 1
@@ -91,17 +92,6 @@ endfunction
 
 " Custom Key Bindings ---------------------------------------------------------
 
-map <C-n> :NERDTreeToggle<CR>
-noremap <silent> <leader>c :let @/=""<cr>
-noremap <silent><leader>w :w!<cr>
-noremap <silent><leader>q :q<cr>
-noremap <silent><leader>l :call g:ToggleNumberMode()<cr>
-
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
 " Switching tabs
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
@@ -111,6 +101,46 @@ nnoremap <leader>5 5gt
 nnoremap <leader>6 6gt
 nnoremap <leader>7 7gt
 nnoremap <leader>8 8gt
+
+" Navigating windows
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+
+" Nerdtree --------------------------------------------------------------------
+map <C-n> :NERDTreeToggle<CR>
+
+
+" Emmet settings --------------------------------------------------------------
+
+let g:user_emmet_leader_key = '<C-e>'
+let g:user_emmet_settings = {
+\  'html': {
+\    'snippets': {
+\      'html:5': "<!doctype html>\n"
+\              ."<html lang=\"en\">\n"
+\              ."<head>\n"
+\              ."  <meta charset=\"utf-8\">\n"
+\              ."  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
+\              ."  <meta name=\"description\" content=\"\">\n"
+\              ."  <title></title>\n"
+\              ."</head>\n"
+\              ."<body>\n"
+\              ."</body>\n"
+\              ."</html>",
+\    }
+\  }
+\}
+
+
+" Fzf -------------------------------------------------------------------------
+
+nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>f :Files<cr>
+nnoremap <leader>F :GFiles<cr>
+nnoremap <leader>w :Windows<cr>
 
 
 " Load plugins ----------------------------------------------------------------
@@ -134,31 +164,3 @@ packadd vim-jsx-pretty
 packadd vim-commentary
 packadd vim-fugitive
 packadd vim-surround
-
-
-" Emmet settings --------------------------------------------------------------
-
-let g:user_emmet_leader_key='<C-e>'
-let g:user_emmet_settings = {
-\  'html': {
-\    'snippets': {
-\      'html:5': "<!doctype html>\n"
-\              ."<html lang=\"en\">\n"
-\              ."<head>\n"
-\              ."  <meta charset=\"utf-8\">\n"
-\              ."  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
-\              ."  <meta name=\"description\" content=\"\">\n"
-\              ."  <title></title>\n"
-\              ."</head>\n"
-\              ."<body>\n"
-\              ."</body>\n"
-\              ."</html>",
-\    }
-\  }
-\}
-
-
-" Fzf -------------------------------------------------------------------------
-
-noremap <leader>b :Buffers<cr>
-noremap <leader>f :Files<cr>
