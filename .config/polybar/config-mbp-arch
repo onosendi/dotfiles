@@ -1,7 +1,7 @@
 ; vim:ft=dosini
 
 [colors]
-black = ${xrdb:color0:#282828}
+black = ${xrdb:color0:#32302f}
 darkgrey = ${xrdb:color8:#928374}
 darkred = ${xrdb:color1:#cc241d}
 red = ${xrdb:color9:#fb4934}
