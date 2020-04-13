@@ -46,7 +46,7 @@ set hlsearch                    " Highlight search results.
 set incsearch                   " Search as you type.
 
 " Clear search results
-noremap <silent> <leader>c :let @/=""<cr> 
+noremap <silent> <leader>c :let @/=""<cr>
 
 
 " Default Tabs and wrapping ---------------------------------------------------
@@ -59,7 +59,7 @@ set softtabstop=2               " How many columns vim uses when you hit Tab in
                                 " insert mode.
 set nowrap                      " Do not wrap lines.
 set whichwrap+=<,>,h,l,[,]      " Wrap and beginning and end of lines. (< > are
-                                " the cursor keys used in 
+                                " the cursor keys used in
                                 " normal and visual mode, and [ ] are the
                                 " cursor keys in insert mode).
 
