@@ -38,16 +38,8 @@ if has("unix")
 endif
 
 " Switch cursor on enter/leave insert mode
-autocmd InsertEnter * set cul
-autocmd InsertLeave * set nocul
-
-
-" Status line -----------------------------------------------------------------
-
-set laststatus=2                 " Always show the status line.
-set statusline=%t\ %m%r%h
-set statusline+=\ -\ %{expand('%:p:h')} 
-set statusline+=%=\ %l/%L\ -\ %c
+" autocmd InsertEnter * set cul
+" autocmd InsertLeave * set nocul
 
 
 " Searching -------------------------------------------------------------------
@@ -104,28 +96,49 @@ noremap <silent> <leader>c :let @/=""<cr>
 noremap <silent><leader>w :w!<cr>
 noremap <silent><leader>q :q<cr>
 noremap <silent><leader>l :call g:ToggleNumberMode()<cr>
-let g:user_emmet_leader_key='<C-e>'
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Switching tabs
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
+nnoremap <leader>5 5gt
+nnoremap <leader>6 6gt
+nnoremap <leader>7 7gt
+nnoremap <leader>8 8gt
+
 
 " Load plugins ----------------------------------------------------------------
 
-packadd nerdtree
+" colors
+packadd gruvbox
+
+" plugins
 packadd emmet-vim
+packadd fzf.vim
+packadd nerdtree
+packadd vim-airline
 packadd vim-flake8
-packadd vim-surround
+
+" syntax
+packadd vim-javascript
 packadd vim-jinja
 packadd vim-jsx-pretty
-packadd vim-javascript
+
+" tpope
 packadd vim-commentary
+packadd vim-fugitive
+packadd vim-surround
 
 
 " Emmet settings --------------------------------------------------------------
 
+let g:user_emmet_leader_key='<C-e>'
 let g:user_emmet_settings = {
 \  'html': {
 \    'snippets': {
@@ -143,3 +156,9 @@ let g:user_emmet_settings = {
 \    }
 \  }
 \}
+
+
+" Fzf -------------------------------------------------------------------------
+
+noremap <leader>b :Buffers<cr>
+noremap <leader>f :Files<cr>
