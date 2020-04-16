@@ -210,3 +210,4 @@ packadd vim-jsx-pretty
 packadd vim-commentary
 packadd vim-fugitive
 packadd vim-surround
+packadd vim-eunuch
