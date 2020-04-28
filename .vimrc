@@ -4,7 +4,7 @@
 " General ---------------------------------------------------------------------
 
 set nocompatible                 " Use Vim settings, rather than Vi.
-let mapleader = ","              " Assign map leader.
+let mapleader = " "              " Assign map leader.
 set encoding=utf8                " Set encoding.
 set autoread                     " Auto read when file is changed externally.
 set history=200                  " Number of lines of history to save.
