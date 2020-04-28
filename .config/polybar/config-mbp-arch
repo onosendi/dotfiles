@@ -63,8 +63,11 @@ cursor-scroll = ns-resize
 [module/bspwm]
 type = internal/bspwm
 
+enable-click = false
+enable-scroll = false
+
 label-focused = %index%
-label-focused-background = ${colors.red}
+label-focused-background = ${colors.black}
 label-focused-foreground = ${colors.white}
 label-focused-underline = ${colors.red}
 label-focused-padding = 1
