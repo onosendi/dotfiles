@@ -18,7 +18,7 @@ for app in ${STARTUP[@]}; do
   fi
 done
 
-feh --bg-tile $HOME/.config/ree-black-texture.jpg # Background image
+feh -bg-color red # Background image
 unclutter --timeout 1 & # Hide mouse arrow
 urxvtd -q -f # Daemonize urxvt
 $HOME/.config/polybar/launch.sh # Launch Polybar
