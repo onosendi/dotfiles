@@ -117,8 +117,8 @@ label = "%percentage_used%%"
 type = internal/alsa
 master-mixer = Master
 interval = 5
-label-volume = %percentage%%
-label-muted = 0%
+label-volume =  %percentage%%
+label-muted =  0%
 label-muted-foreground = ${colors.red}
 
 [settings]
