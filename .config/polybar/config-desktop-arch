@@ -38,7 +38,7 @@ offset-x = 0%
 offset-y = 0
 background = ${colors.black}
 modules-left = bspwm
-modules-right = cpu filesystem alsa date time
+modules-right = cpu memory filesystem alsa date time
 module-margin-right = 2
 tray-position = right
 tray-maxsize = 15
@@ -46,6 +46,7 @@ tray-padding = 10
 font-0 = "SF Mono:pixelsize=10;2"
 font-1 = "FontAwesome5Free:pixelsize=10;1"
 font-2 = "FontAwesome5Free:pixelsize=10;1"
+font-3 = "Material Icons:size=13;4"
 
 ; Right monitor.
 [bar/DP-3]
@@ -81,7 +82,7 @@ format-prefix = " "
 type = internal/cpu
 interval = 2
 label = " %percentage:1%%"
-format-prefix = ""
+format-prefix = ""
 format-prefix-foreground = ${colors.darkgrey}
 
 [module/bspwm]
@@ -102,6 +103,15 @@ label-urgent-padding = 1
 label-empty = %name%
 label-empty-foreground = ${colors.altgrey}
 label-empty-padding = 1
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.darkgrey}
+format-prefix-background = ${colors.black}
+label-background = ${colors.black}
+label = "%percentage_used%%"
 
 [module/alsa]
 type = internal/alsa
