@@ -19,45 +19,42 @@ lightgrey = ${xrdb:color7:#a89984}
 white = ${xrdb:color15:#ebdbb2}
 altgrey = #555555
 
+[bar/base]
+background = ${colors.black}
+cursor-click = pointer
+cursor-scroll = ns-resize
+font-0 = "SF Mono:pixelsize=10;2"
+font-1 = "FontAwesome5Free:pixelsize=10;1"
+font-2 = "FontAwesome5Free:style=Solid:pixelsize=10;1"
+font-3 = "Material Icons:size=13;4"
+height = 30
+line-size = 2
+module-margin-right = 3
+modules-left = bspwm
+offset-x = 0
+offset-y = 0
+width = 100%
+
+
 ; Left monitor.
 [bar/DP-2]
+inherit = bar/base
 monitor = DP-2
-width = 99.2%
-offset-x = 0.4%
-offset-y = 0
-background = ${colors.black}
-modules-left = bspwm
-font-0 = "SF Mono:pixelsize=10;2"
-cursor-click = pointer
 
 ; Center monitor.
 [bar/DP-1]
-monitor = DP-1
-width = 99.8%
-offset-x = 0%
-offset-y = 0
-background = ${colors.black}
-modules-left = bspwm
+inherit = bar/base
 modules-right = cpu memory filesystem alsa date time
-module-margin-right = 2
+monitor = DP-1
 tray-position = right
 tray-maxsize = 15
-tray-padding = 10
-font-0 = "SF Mono:pixelsize=10;2"
-font-1 = "FontAwesome5Free:pixelsize=10;1"
-font-2 = "FontAwesome5Free:pixelsize=10;1"
-font-3 = "Material Icons:size=13;4"
+tray-padding = 20
+
 
 ; Right monitor.
 [bar/DP-3]
+inherit = bar/base
 monitor = DP-3
-width = 99%
-offset-x = 0.5%
-offset-y = 0
-background = ${colors.black}
-foreground = ${colors.white}
-modules-left = bspwm
-font-0 = "SF Mono:pixelsize=10;2"
 
 [module/filesystem]
 type = internal/fs
@@ -88,8 +85,13 @@ format-prefix-foreground = ${colors.darkgrey}
 [module/bspwm]
 type = internal/bspwm
 
+enable-click = false
+enable-scroll = false
+
 label-focused = %name%
-label-focused-background = ${colors.red}
+label-focused-background = ${colors.black}
+label-focused-foreground = ${colors.white}
+label-focused-underline = ${colors.red}
 label-focused-padding = 1
 
 label-occupied = %name%
@@ -104,6 +106,9 @@ label-empty = %name%
 label-empty-foreground = ${colors.altgrey}
 label-empty-padding = 1
 
+label-dimmed-underline = ${bar/DP-2.background}
+label-dimmed-empty-foreground = ${colors.altgrey}
+
 [module/memory]
 type = internal/memory
 interval = 2
@@ -117,9 +122,13 @@ label = "%percentage_used%%"
 type = internal/alsa
 master-mixer = Master
 interval = 5
-label-volume =  %percentage%%
-label-muted =  0%
+label-volume = %{F#928374}%{F-} %percentage%%
+label-volume-foreground = ${colors.white}
+label-muted = %{F#928374}%{F-} %{F#fb4934}0%
 label-muted-foreground = ${colors.red}
 
 [settings]
 screenchange-reload = true
+
+[global/wm]
+margin-bottom = 5
