@@ -118,7 +118,7 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Emmet settings --------------------------------------------------------------
 
-let g:user_emmet_leader_key = '<C-e>'
+let g_user_emmet_leader_key = '<C-e>'
 let g:user_emmet_settings = {
 \  'html': {
 \    'snippets': {
@@ -211,7 +211,6 @@ packadd vim-jsx-pretty
 
 " tpope
 packadd vim-commentary
-packadd vim-fugitive
 packadd vim-surround
 packadd vim-eunuch
 packadd vim-repeat
