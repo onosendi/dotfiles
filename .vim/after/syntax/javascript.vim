@@ -1,2 +1,4 @@
-" syn keyword javaScriptForOperator of
-" syn keyword javaScriptIdentifier const
+syn keyword jsNew new
+
+hi! link jsNew GruvboxAqua
+hi! link jsFuncCall GruvboxBlue
