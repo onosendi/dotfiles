@@ -118,7 +118,7 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Emmet settings --------------------------------------------------------------
 
-let g_user_emmet_leader_key = '<C-e>'
+let g:user_emmet_leader_key = '<C-e>'
 let g:user_emmet_settings = {
 \  'html': {
 \    'snippets': {
