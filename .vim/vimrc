@@ -134,6 +134,12 @@ let g:user_emmet_settings = {
 \              ."</body>\n"
 \              ."</html>",
 \    }
+\  },
+\  'javascriptreact': {
+\    'snippets': {
+\      'rcc': "import React from 'react';\n\nexport default class Component extends React.Component {\n\trender() {\n\t\treturn (\n\t\t);\n\t}\n}",
+\      'rfc': "import React from 'react';\n\nconst Component = () => {\n\treturn (\n${cursor}\n\t);\n};\n\nexport default Component;"
+\    }
 \  }
 \}
 
