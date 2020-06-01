@@ -225,7 +225,6 @@ packadd emmet-vim
 packadd fzf.vim
 packadd nerdtree
 packadd vim-airline
-packadd vim-flake8
 packadd ale
 
 " syntax
