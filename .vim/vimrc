@@ -113,7 +113,8 @@ nnoremap <leader>s <C-W>=
 
 
 " Nerdtree --------------------------------------------------------------------
-map <C-n> :NERDTreeToggle<CR>
+
+map <silent><C-n> :NERDTreeToggle<CR>
 
 
 " Emmet settings --------------------------------------------------------------
@@ -194,8 +195,24 @@ let g:airline_symbols.dirty = ''
 
 
 " Gruvbox ---------------------------------------------------------------------
+
 " let g:gruvbox_contrast_dark = 'soft'
 set bg=dark
+
+
+" Ale -------------------------------------------------------------------------
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_filetype_changed = 0
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_save = 0
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_sign_column_always = 0
+
+nnoremap <silent><leader>af :ALEFix<CR>
+nnoremap <silent><leader>al :ALELint<CR>
+nnoremap <silent><leader>ar :ALEReset<CR>
+nnoremap <silent><leader>an :ALENextWrap<CR>
+nnoremap <silent><leader>ap :ALEPreviousWrap<CR>
 
 
 " Load plugins ----------------------------------------------------------------
@@ -209,6 +226,7 @@ packadd fzf.vim
 packadd nerdtree
 packadd vim-airline
 packadd vim-flake8
+packadd ale
 
 " syntax
 packadd vim-javascript
