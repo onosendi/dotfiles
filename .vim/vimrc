@@ -139,6 +139,7 @@ let g:user_emmet_settings = {
 \  'javascriptreact': {
 \    'snippets': {
 \      'rcc': "import React from 'react';\n\nexport default class Component extends React.Component {\n\trender() {\n\t\treturn (\n\t\t);\n\t}\n}",
+\      'rfcp': "import PropTypes from 'prop-types';\nimport React from 'react';\n\nconst ${cursor}Component = (props) => {\n\tconst {\n\t} = props;\n\n\treturn (\n\t);\n};\n\nComponent.propTypes = {\n}\n\nexport default Component;",
 \      'rfc': "import React from 'react';\n\nconst Component = () => {\n\treturn (\n${cursor}\n\t);\n};\n\nexport default Component;"
 \    }
 \  }
