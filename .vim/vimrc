@@ -1,6 +1,3 @@
-" Author: Daniel Lindegren
-
-
 " General ---------------------------------------------------------------------
 
 set nocompatible                 " Use Vim settings, rather than Vi.
