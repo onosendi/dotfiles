@@ -10,7 +10,7 @@ alias neomutt="cd ~/Downloads && /usr/bin/neomutt"
 
 # Set keyboard repeat rate/delay
 if [ $DISPLAY ]; then
-    xset r rate 275 40
+    xset r rate 275 35
     xset m 0 0 # Turn off acceleration
 fi
 
