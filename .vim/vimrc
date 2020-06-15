@@ -241,6 +241,7 @@ packadd nerdtree
 packadd vim-airline
 packadd ale
 packadd indentLine
+packadd coc.nvim
 
 " syntax
 packadd vim-javascript
