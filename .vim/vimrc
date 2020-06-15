@@ -227,6 +227,11 @@ nnoremap <silent><leader>an :ALENextWrap<CR>
 nnoremap <silent><leader>ap :ALEPreviousWrap<CR>
 
 
+" indentLine ------------------------------------------------------------------
+
+let g:indentLine_color_term = 237
+
+
 " Load plugins ----------------------------------------------------------------
 
 " colors
