@@ -13,7 +13,8 @@ URxvt.externalBorder: 0
 URxvt.internalBorder: 10
 URxvt.scrollBar: false
 URxvt.cursorBlink: false
-URxvt.cursorUnderline: true
+URxvt.cursorUnderline: false
+URxvt.cursorColor: #ebdbb2
 URxvt.pointerBlank: false
 
 ! Fonts
