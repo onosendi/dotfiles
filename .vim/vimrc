@@ -244,9 +244,10 @@ packadd indentLine
 packadd coc.nvim
 
 " syntax
-packadd vim-javascript
-packadd vim-jinja
-packadd vim-jsx-pretty
+" packadd vim-javascript
+" packadd vim-jinja
+" packadd vim-jsx-pretty
+packadd vim-polyglot
 
 " tpope
 packadd vim-commentary
