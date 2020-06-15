@@ -238,6 +238,7 @@ packadd fzf.vim
 packadd nerdtree
 packadd vim-airline
 packadd ale
+packadd indentLine
 
 " syntax
 packadd vim-javascript
