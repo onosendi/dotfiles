@@ -112,7 +112,7 @@ nnoremap <leader>s <C-W>=
 " Nerdtree --------------------------------------------------------------------
 
 let g:NERDTreeShowLineNumbers = 1
-let g:NERDTreeWinSize = 40
+let g:NERDTreeWinSize = 35
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeDirArrows = 1
 map <silent><C-n> :NERDTreeToggle<CR>
@@ -214,6 +214,7 @@ set bg=dark
 
 
 " Ale -------------------------------------------------------------------------
+
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_filetype_changed = 0
 let g:ale_lint_on_insert_leave = 0
