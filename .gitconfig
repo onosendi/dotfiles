@@ -7,3 +7,5 @@
   st = status
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   publish = push live master:master
+[pull]
+	rebase = false
