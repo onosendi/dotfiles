@@ -246,8 +246,8 @@ packadd fzf.vim
 packadd nerdtree
 packadd vim-airline
 packadd ale
-packadd indentLine
-packadd coc.nvim
+" packadd indentLine
+" packadd coc.nvim
 packadd vim-polyglot
 packadd synstack.vim
 
