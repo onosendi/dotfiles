@@ -229,6 +229,11 @@ nnoremap <silent><leader>ap :ALEPreviousWrap<CR>
 let g:indentLine_color_term = 237
 
 
+" coc -------------------------------------------------------------------------
+
+inoremap <silent><expr> <c-space> coc#refresh()
+
+
 " polyglot --------------------------------------------------------------------
 
 let g:python_highlight_space_errors = 0
@@ -246,10 +251,10 @@ packadd fzf.vim
 packadd nerdtree
 packadd vim-airline
 packadd ale
-" packadd indentLine
-" packadd coc.nvim
+packadd indentLine
+packadd coc.nvim
 packadd vim-polyglot
-packadd synstack.vim
+packadd synstack.vim " https://github.com/dylnmc/synstack.vim.git
 
 " tpope
 packadd vim-commentary
