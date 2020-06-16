@@ -8,13 +8,14 @@ alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 # Change directory to ~/Downloads and start mutt.
 alias neomutt="cd ~/Downloads && /usr/bin/neomutt"
 
-alias vim="nvim"
-
 # Set keyboard repeat rate/delay
 if [ $DISPLAY ]; then
     xset r rate 275 35
     xset m 0 0 # Turn off acceleration
 fi
+
+# Alias vim => nvim
+alias vim="nvim"
 
 # Fix terminal colors for gruvbox.
 source "$HOME/.bin/gruvbox_256palette.sh"
