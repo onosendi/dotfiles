@@ -8,6 +8,8 @@ alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 # Change directory to ~/Downloads and start mutt.
 alias neomutt="cd ~/Downloads && /usr/bin/neomutt"
 
+alias vim="nvim"
+
 # Set keyboard repeat rate/delay
 if [ $DISPLAY ]; then
     xset r rate 275 35
