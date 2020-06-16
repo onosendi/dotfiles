@@ -229,6 +229,12 @@ nnoremap <silent><leader>ap :ALEPreviousWrap<CR>
 let g:indentLine_color_term = 237
 
 
+" polyglot --------------------------------------------------------------------
+
+let g:python_highlight_space_errors = 0
+let g:python_highlight_operators = 0
+
+
 " Load plugins ----------------------------------------------------------------
 
 " colors
@@ -242,12 +248,8 @@ packadd vim-airline
 packadd ale
 packadd indentLine
 packadd coc.nvim
-
-" syntax
-" packadd vim-javascript
-" packadd vim-jinja
-" packadd vim-jsx-pretty
 packadd vim-polyglot
+packadd synstack.vim
 
 " tpope
 packadd vim-commentary
