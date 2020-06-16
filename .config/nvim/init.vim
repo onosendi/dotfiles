@@ -111,6 +111,10 @@ nnoremap <leader>s <C-W>=
 
 " Nerdtree --------------------------------------------------------------------
 
+let g:NERDTreeShowLineNumbers = 1
+let g:NERDTreeWinSize = 40
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeDirArrows = 1
 map <silent><C-n> :NERDTreeToggle<CR>
 
 
