@@ -266,3 +266,4 @@ packadd vim-commentary
 packadd vim-surround
 packadd vim-eunuch
 packadd vim-repeat
+packadd vim-fugitive
