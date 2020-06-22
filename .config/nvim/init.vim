@@ -257,7 +257,7 @@ packadd nerdtree
 packadd vim-airline
 packadd ale
 packadd indentLine
-packadd coc.nvim
+" packadd coc.nvim
 packadd vim-polyglot
 packadd synstack.vim " https://github.com/dylnmc/synstack.vim.git
 
