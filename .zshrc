@@ -9,7 +9,7 @@ source ~/.grml-zsh
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 # Fix terminal colors for gruvbox.
-source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh"
+source "$HOME/.bin/gruvbox_256palette_osx.sh"
 
 ##
 # grml-zsh-config
@@ -22,3 +22,6 @@ zstyle ':vcs_info:*' stagedstr '+'
 zstyle ':vcs_info:git*' formats "%{${fg[cyan]}%}[%{$reset_color%}%{${fg_bold[red]}%}%b%{$reset_color%}%{${fg_bold[yellow]}%}%m%u%c%{$reset_color%}%{${fg[cyan]}%}]%{$reset_color%} "
 
 zstyle ':prompt:grml:left:setup' items rc change-root path vcs percent
+
+# Use vi mode
+bindkey -v
