@@ -1,0 +1,45 @@
+#!/bin/bash
+
+usage() {
+cat <<EOM
+Usage: $(basename "$0") OPTIONS
+
+Options:
+  -l, --lock      lock desktop
+  -s, --suspend   suspend to ram
+EOM
+}
+
+# Display help if no options are specified.
+[[ $# -eq 0 ]] && usage && exit 1
+
+while getopts ":lsh-:" arg;
+do
+  case $arg in
+    -)
+      case "${OPTARG}" in
+        lock) desktop_lock=1;;
+        suspend) desktop_suspend=1;;
+        help) usage && exit 0;;
+        *) usage && exit 1;;
+      esac;;
+    l) desktop_lock=1;;
+    s) desktop_suspend=1;;
+    h) usage && exit 0;;
+    \?) usage && exit 1;;
+  esac
+done
+
+lock() {
+  /usr/bin/i3lock --no-unlock-indicator --color=000000
+}
+
+if [ -n "$desktop_lock" ]; then
+  lock
+fi
+
+if [ -n "$desktop_suspend" ]; then
+  lock && systemctl suspend
+fi
+
+exit 0
