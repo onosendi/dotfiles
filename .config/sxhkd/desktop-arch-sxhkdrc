@@ -17,7 +17,7 @@ alt + Escape
 #
 # bspwm hotkeys
 #
-super + alt + {l,s}
+super + alt + ctrl {l,s}
   ~/.bin/power-menu {--lock,--suspend}
 
 # quit/restart bspwm
