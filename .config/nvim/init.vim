@@ -1,6 +1,8 @@
 " General ---------------------------------------------------------------------
 
-set nocompatible                 " Use Vim settings, rather than Vi.
+set nocompatible                 " Use Vim settings, rather than Vi. This must
+                                 " be the set on the first line or it may have
+                                 " some unexpected results.
 let mapleader = " "              " Assign map leader.
 set encoding=utf8                " Set encoding.
 set autoread                     " Auto read when file is changed externally.
