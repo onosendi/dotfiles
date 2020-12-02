@@ -31,7 +31,8 @@ do
 done
 
 lock() {
-  /usr/bin/i3lock --no-unlock-indicator --color=000000
+  # /usr/bin/i3lock --no-unlock-indicator --color=000000
+  /usr/bin/i3lock --color=000000
 }
 
 if [ -n "$desktop_lock" ]; then
@@ -39,7 +40,9 @@ if [ -n "$desktop_lock" ]; then
 fi
 
 if [ -n "$desktop_suspend" ]; then
-  lock && systemctl suspend
+  lock
+  sleep 3
+  systemctl suspend
 fi
 
 exit 0
