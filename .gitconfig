@@ -9,3 +9,5 @@
   publish = push live master:master
 [pull]
   rebase = false
+[init]
+  defaultBranch = master
