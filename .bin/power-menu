@@ -30,17 +30,11 @@ do
   esac
 done
 
-lock() {
-  /usr/bin/i3lock --no-unlock-indicator --color=000000
-}
-
 if [ -n "$desktop_lock" ]; then
-  lock
+  loginctl lock-session
 fi
 
 if [ -n "$desktop_suspend" ]; then
-  lock
-  sleep 10
   systemctl suspend
 fi
 

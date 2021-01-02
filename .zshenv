@@ -9,3 +9,7 @@ fi
 if [ -d "$HOME/.cargo" ]; then
   export PATH="$HOME/.cargo:$PATH"
 fi
+
+if [ -d "$HOME/.gem/ruby/2.7.0/bin" ]; then
+  export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
+fi
