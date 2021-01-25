@@ -157,7 +157,7 @@ let g:user_emmet_settings = {
 \      'edfun': "export default function ${cursor}() {\n}",
 \      'expd': "export default ${cursor};",
 \      'expnd': "export { default } from './${cursor}';",
-\      'rcc': "import React from 'react';\n\nexport default class Component extends React.Component {\n\trender() {\n\t\treturn (\n\t\t);\n\t}\n}",
+\      'rcc': "import React from 'react';\n\nexport default class Component extends React.Component (\n\t\n);",
 \      'rfc': "import React from 'react';\n\nconst ${cursor}Component = () => {\n\treturn (\n\t);\n};\n\nexport default Component;",
 \      'rfcp': "import PropTypes from 'prop-types';\nimport React from 'react';\n\nconst ${cursor}Component = (props) => {\n\tconst {\n\t} = props;\n\n\treturn (\n\t);\n};\n\nComponent.propTypes = {\n};\n\nexport default Component;",
 \      'propd': "${cursor}.defaultProps = {\n};",
