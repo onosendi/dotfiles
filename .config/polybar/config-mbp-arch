@@ -1,6 +1,7 @@
 ; vim:ft=dosini
 
 [colors]
+# medium contrast: black = ${xrdb:color0:#32302f}
 black = ${xrdb:color0:#32302f}
 darkgrey = ${xrdb:color8:#928374}
 darkred = ${xrdb:color1:#cc241d}
