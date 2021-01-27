@@ -221,7 +221,7 @@ let g:airline_symbols.dirty = ''
 
 " Gruvbox ---------------------------------------------------------------------
 
-let g:gruvbox_contrast_dark = 'hard'
+" let g:gruvbox_contrast_dark = 'hard'
 set bg=dark
 
 
