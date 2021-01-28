@@ -1,3 +1,26 @@
+" Load plugins ----------------------------------------------------------------
+
+call plug#begin('~/.config/nvim/plugged')
+
+Plug('morhetz/gruvbox')
+Plug('mattn/emmet-vim')
+Plug('junegunn/fzf.vim')
+Plug('preservim/nerdtree')
+Plug('vim-airline/vim-airline')
+Plug('dense-analysis/ale')
+Plug('Yggdroot/indentLine')
+Plug('sheerun/vim-polyglot')
+Plug('dylnmc/synstack.vim')
+Plug('tpope/vim-commentary')
+Plug('tpope/vim-surround')
+Plug('tpope/vim-eunuch')
+Plug('tpope/vim-repeat')
+Plug('tpope/vim-fugitive')
+Plug('neoclide/coc.nvim')
+
+call plug#end()
+
+
 " General ---------------------------------------------------------------------
 
 set nocompatible                 " Use Vim settings, rather than Vi. This must
@@ -21,7 +44,7 @@ set wildmenu                     " Show file menu when tabbing.
 " UI --------------------------------------------------------------------------
 
 syntax on                        " Enable syntax highlighting.
-colorscheme gruvbox              " Colorscheme.
+set bg=dark                      " Use dark background.
 set t_md=                        " Disable bold colors
 set ruler                        " Always show the cursor's position.
 set number relativenumber        " Hybrid line number and relative numbers.
@@ -45,7 +68,7 @@ set hlsearch                    " Highlight search results.
 set incsearch                   " Search as you type.
 
 " Clear search results
-noremap <silent> <leader>c :let @/=""<cr>
+noremap <silent> <leader>dc :let @/=""<cr>
 
 
 " Default Tabs and wrapping ---------------------------------------------------
@@ -78,7 +101,7 @@ autocmd BufReadPost *
 
 " ToggleNumberMode ------------------------------------------------------------
 
-noremap <silent><leader>l :call g:ToggleNumberMode()<cr>
+noremap <silent><leader>dl :call g:ToggleNumberMode()<cr>
 
 function! g:ToggleNumberMode()
   if &rnu == 1
@@ -108,7 +131,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Fix split sizing
-nnoremap <leader>s <C-W>=
+nnoremap <leader>ds <C-W>=
 
 
 " Nerdtree --------------------------------------------------------------------
@@ -172,10 +195,10 @@ let g:user_emmet_settings = {
 
 " Fzf -------------------------------------------------------------------------
 
-nnoremap <leader>b :Buffers<cr>
-nnoremap <leader>f :Files<cr>
-nnoremap <leader>F :GFiles<cr>
-nnoremap <leader>w :Windows<cr>
+nnoremap <leader>fb :Buffers<cr>
+nnoremap <leader>ff :Files<cr>
+nnoremap <leader>fF :GFiles<cr>
+nnoremap <leader>fw :Windows<cr>
 
 
 " Airline ---------------------------------------------------------------------
@@ -222,7 +245,7 @@ let g:airline_symbols.dirty = ''
 " Gruvbox ---------------------------------------------------------------------
 
 " let g:gruvbox_contrast_dark = 'hard'
-set bg=dark
+colorscheme gruvbox
 
 
 " Ale -------------------------------------------------------------------------
@@ -248,33 +271,15 @@ let g:indentLine_color_term = 237
 
 " coc -------------------------------------------------------------------------
 
-inoremap <silent><expr> <c-space> coc#refresh()
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
 
 
 " polyglot --------------------------------------------------------------------
 
 let g:python_highlight_space_errors = 0
 let g:python_highlight_operators = 0
-
-
-" Load plugins ----------------------------------------------------------------
-
-" colors
-packadd gruvbox
-
-" plugins
-packadd emmet-vim
-packadd fzf.vim
-packadd nerdtree
-packadd vim-airline
-packadd ale
-packadd indentLine
-packadd vim-polyglot
-packadd synstack.vim " https://github.com/dylnmc/synstack.vim.git
-
-" tpope
-packadd vim-commentary
-packadd vim-surround
-packadd vim-eunuch
-packadd vim-repeat
-packadd vim-fugitive
