@@ -195,10 +195,10 @@ let g:user_emmet_settings = {
 
 " Fzf -------------------------------------------------------------------------
 
-nnoremap <leader>fb :Buffers<cr>
-nnoremap <leader>ff :Files<cr>
-nnoremap <leader>fF :GFiles<cr>
-nnoremap <leader>fw :Windows<cr>
+" nnoremap <leader>fb :Buffers<cr>
+nnoremap <leader>f :Files<cr>
+" nnoremap <leader>fF :GFiles<cr>
+" nnoremap <leader>fw :Windows<cr>
 
 
 " Airline ---------------------------------------------------------------------
@@ -250,11 +250,11 @@ colorscheme gruvbox
 
 " Ale -------------------------------------------------------------------------
 
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_filetype_changed = 0
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_save = 0
-let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_filetype_changed = 1
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'always'
 let g:ale_sign_column_always = 0
 
 nnoremap <silent><leader>af :ALEFix<CR>
@@ -262,6 +262,15 @@ nnoremap <silent><leader>al :ALELint<CR>
 nnoremap <silent><leader>ar :ALEReset<CR>
 nnoremap <silent><leader>an :ALENextWrap<CR>
 nnoremap <silent><leader>ap :ALEPreviousWrap<CR>
+
+" Always show the sign column.
+if has("patch-8.1.1564")
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+highlight clear SignColumn
 
 
 " indentLine ------------------------------------------------------------------
@@ -277,6 +286,34 @@ set updatetime=300
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+let g:coc_global_extensions = [
+  \ 'coc-json',
+  \ 'coc-python',
+  \ 'coc-tsserver',
+  \ ]
+
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Go to definition.
+nmap <silent>cgd <Plug>(coc-definition)
+
+" Symbol renaming.
+nmap <leader>crn <Plug>(coc-rename)
 
 
 " polyglot --------------------------------------------------------------------
