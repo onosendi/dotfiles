@@ -146,51 +146,6 @@ map <silent><C-n> :NERDTreeToggle<CR>
 " Emmet settings --------------------------------------------------------------
 
 let g:user_emmet_leader_key = '<C-e>'
-let g:user_emmet_settings = {
-\  'html': {
-\    'snippets': {
-\      'html:5': "<!doctype html>\n"
-\              ."<html lang=\"en\">\n"
-\              ."<head>\n"
-\              ."\t<meta charset=\"utf-8\">\n"
-\              ."\t<meta\n"
-\              ."\t\tcontent=\"width=device-width, initial-scale=1\"\n"
-\              ."\t\tname=\"viewport\"\n"
-\              ."\t>\n"
-\              ."\t<meta\n"
-\              ."\t\tcontent=\"\"\n"
-\              ."\t\tname=\"description\"\n"
-\              ."\t>\n"
-\              ."\t<title></title>\n"
-\              ."\t<link\n"
-\              ."\t\thref=\"\"\n"
-\              ."\t\trel=\"stylesheet\"\n"
-\              ."\t>\n"
-\              ."</head>\n"
-\              ."<body>\n"
-\              ."</body>\n"
-\              ."</html>",
-\    }
-\  },
-\  'javascriptreact': {
-\    'snippets': {
-\      'afun': "const ${cursor} = () => {\n};",
-\      'cl': "console.log(${cursor});",
-\      'ce': "console.error(${cursor});",
-\      'edfun': "export default function ${cursor}() {\n}",
-\      'expd': "export default ${cursor};",
-\      'expnd': "export { default } from './${cursor}';",
-\      'rcc': "import React from 'react';\n\nexport default class Component extends React.Component (\n\t\n);",
-\      'rfc': "import React from 'react';\n\nconst ${cursor}Component = () => {\n\treturn (\n\t);\n};\n\nexport default Component;",
-\      'rfcp': "import PropTypes from 'prop-types';\nimport React from 'react';\n\nconst ${cursor}Component = (props) => {\n\tconst {\n\t} = props;\n\n\treturn (\n\t);\n};\n\nComponent.propTypes = {\n};\n\nexport default Component;",
-\      'propd': "${cursor}.defaultProps = {\n};",
-\      'propt': "${cursor}.propTypes = {\n};",
-\    }
-\  },
-\  'javascript': {
-\    'extends': 'javascriptreact',
-\  }
-\}
 
 
 " Fzf -------------------------------------------------------------------------
