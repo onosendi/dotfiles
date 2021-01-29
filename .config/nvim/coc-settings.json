@@ -5,8 +5,8 @@
   "python.linting.enabled": true,
   "python.jediEnabled": false,
   "snippets.extends": {
-    "cpp": ["c"],
-    "javascriptreact": ["javascript"]
+    "javascriptreact": ["javascript"],
+    "htmldjango": ["html"]
   },
   "snippets.userSnippetsDirectory": "~/.config/nvim/snippets"
 }
