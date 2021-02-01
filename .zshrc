@@ -17,9 +17,6 @@ fi
 # Alias vim => nvim
 alias vim="nvim"
 
-# Fix terminal colors for gruvbox.
-source "$HOME/.bin/gruvbox_256palette.sh"
-
 ##
 # grml-zsh-config
 #

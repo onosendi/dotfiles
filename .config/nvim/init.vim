@@ -51,6 +51,7 @@ set number relativenumber        " Hybrid line number and relative numbers.
 let loaded_matchparen = 1        " Turn off parenthesis match highlighting.
 set nofoldenable                 " Do not fold code.
 set cmdheight=1                  " Height of the command bar.
+set termguicolors
 highlight NonText ctermbg=none
 highlight CursorLineNr ctermbg=none
 
