@@ -8,8 +8,10 @@ source ~/.grml-zsh
 # Manage dotfiles.
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
+alias vim="/usr/local/bin/nvim"
+
 # Fix terminal colors for gruvbox.
-source "$HOME/.bin/gruvbox_256palette_osx.sh"
+# source "$HOME/.bin/gruvbox_256palette_osx.sh"
 
 ##
 # grml-zsh-config
@@ -21,7 +23,20 @@ zstyle ':vcs_info:*' unstagedstr '!'
 zstyle ':vcs_info:*' stagedstr '+'
 zstyle ':vcs_info:git*' formats "%{${fg[cyan]}%}[%{$reset_color%}%{${fg_bold[red]}%}%b%{$reset_color%}%{${fg_bold[yellow]}%}%m%u%c%{$reset_color%}%{${fg[cyan]}%}]%{$reset_color%} "
 
-zstyle ':prompt:grml:left:setup' items rc change-root path vcs percent
+source /usr/local/bin/virtualenvwrapper.sh
+function virtual_env_prompt () {
+  REPLY=${VIRTUAL_ENV+(${VIRTUAL_ENV:t}) }
+}
+grml_theme_add_token virtual-env -f virtual_env_prompt '%F{yellow}' '%f'
+
+zstyle ':prompt:grml:left:setup' items rc change-root virtual-env path vcs percent
 
 # Use vi mode
 bindkey -v
+
+# Setting fd as the default source for fzf
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git/'
+
+# For Node Version Manager.
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
