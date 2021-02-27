@@ -1,12 +1,3 @@
 {
-  "diagnostic.enable": false,
-  "python.linting.pylintEnabled": false,
-  "python.linting.flake8Enabled": true,
-  "python.linting.enabled": true,
-  "python.jediEnabled": false,
-  "snippets.extends": {
-    "javascriptreact": ["javascript"],
-    "htmldjango": ["html"]
-  },
-  "snippets.userSnippetsDirectory": "~/.config/nvim/snippets"
+  "diagnostic.enable": false 
 }
