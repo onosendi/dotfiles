@@ -259,7 +259,6 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 
 let g:coc_global_extensions = [
   \ 'coc-json',
-  \ 'coc-python',
   \ 'coc-tsserver',
   \ 'coc-css',
   \ 'coc-emmet',
