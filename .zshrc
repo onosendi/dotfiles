@@ -1,3 +1,5 @@
+fpath+=~/.zfunc
+
 # Colorize pacman results.
 alias pacman="pacman --color auto"
 
