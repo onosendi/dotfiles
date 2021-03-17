@@ -263,6 +263,7 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-css',
   \ 'coc-emmet',
+  \ 'coc-html',
   \ ]
 
 inoremap <silent><expr> <c-space> coc#refresh()

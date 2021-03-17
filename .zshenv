@@ -21,6 +21,11 @@ if [ -d "/usr/local/share/python" ]; then
     export PATH="/usr/local/share/python:$PATH"
 fi
 
+if [ -d "$HOME/.poetry/bin" ]; then
+    export PATH="$HOME/.poetry/bin:$PATH"
+fi
+
+# Configuration for virtualenv
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv

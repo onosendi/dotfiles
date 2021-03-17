@@ -1,3 +1,6 @@
 {
-  "diagnostic.enable": false
+  "diagnostic.enable": false,
+  "emmet.includeLanguages": {
+    "htmldjango": "html",
+  }
 }
