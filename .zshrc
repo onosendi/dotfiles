@@ -7,6 +7,7 @@ source ~/.grml-zsh
 
 # Manage dotfiles.
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias global-dotfiles="/usr/bin/git --git-dir=$HOME/.global-dotfiles/ --work-tree=$HOME"
 
 alias vim="/usr/local/bin/nvim"
 
