@@ -5,6 +5,7 @@ alias pacman="pacman --color auto"
 
 # Manage dotfiles.
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
+alias global-dotfiles="/usr/bin/git --git-dir=$HOME/.global-dotfiles.git/ --work-tree=$HOME"
 
 # By default Mutt will save attachments to the folder it was started from.
 # Change directory to ~/Downloads and start mutt.
