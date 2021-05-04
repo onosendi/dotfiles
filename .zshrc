@@ -11,9 +11,6 @@ alias global-dotfiles="/usr/bin/git --git-dir=$HOME/.global-dotfiles/ --work-tre
 
 alias vim="/usr/local/bin/nvim"
 
-# Fix terminal colors for gruvbox.
-# source "$HOME/.bin/gruvbox_256palette_osx.sh"
-
 ##
 # grml-zsh-config
 #
