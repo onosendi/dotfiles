@@ -28,7 +28,7 @@ nextcloud & # Launch Nextcloud
 if [ "$(hostname)" == "desktop-arch" ]; then
   # picom & # Window compositor
   sxhkd -c "$HOME/.config/sxhkd/desktop-arch-sxhkdrc" &
-  xss-lock -- /usr/bin/i3lock --nofork --no-unlock-indicator --color=000000 &
+  # xss-lock -- /usr/bin/i3lock --nofork --no-unlock-indicator --color=000000 &
   protonmail-bridge --no-window &
   bspc monitor DP-2 -d 1 2
   bspc monitor DP-1 -d 3 4 5 6
