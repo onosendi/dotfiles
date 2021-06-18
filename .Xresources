@@ -23,7 +23,7 @@ URxvt.letterSpace: -2
 
 ! Plugins
 URxvt.perl-ext-common: matcher
-URxvt.url-launcher: /usr/bin/chromium
+URxvt.url-launcher: /usr/bin/firefox-developer-edition
 URxvt.matcher.button: 1
 
 !
