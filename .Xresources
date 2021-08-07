@@ -19,7 +19,7 @@ URxvt.pointerBlank: false
 
 ! Fonts
 URxvt.allow_bold: false
-URxvt.letterSpace: -2
+URxvt.letterSpace: -1
 
 ! Plugins
 URxvt.perl-ext-common: matcher
