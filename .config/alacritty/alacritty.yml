@@ -29,14 +29,14 @@ cursor:
 
 font:
   normal:
-    family: RobotoMono Nerd Font Mono
+    family: SFMono Nerd Font
     style: Regular
 
   offset:
-    x: -2
+    x: -1
     y: 0
 
-  size: 11
+  size: 10
 
 window:
   decorations: none

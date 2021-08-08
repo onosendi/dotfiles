@@ -1,12 +1,6 @@
 # ~/.xinitrc
 
-if [ "$(hostname)" == "desktop-arch" ]; then
-  xrandr --output "DP-2" --rotate left
-  xrdb ~/.Xresources.d/desktop-arch
-elif [ "$(hostname)" == "mbp-arch" ]; then
-  xrdb ~/.Xresources.d/mbp-arch
-fi
-
-xrdb -merge ~/.Xresources
+xrandr --output "DP-2" --rotate left
+xrdb ~/.Xresources
 
 exec bspwm
