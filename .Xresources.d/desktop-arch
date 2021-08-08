@@ -1,2 +1,2 @@
-URxvt.font: xft:RobotoMono Nerd Font:size=10:style=regular
-Xft.dpi: 110
+URxvt.font: xft:RobotoMono Nerd Font:pixelsize=16:style=medium
+Xft.dpi: 100
