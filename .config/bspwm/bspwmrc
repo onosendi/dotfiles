@@ -5,7 +5,6 @@ STARTUP=(\
   # xss-lock
   protonmail-bridge
   unclutter
-  urxvtd
   nextcloud
   polybar
   vmware-user
@@ -21,26 +20,17 @@ for app in ${STARTUP[@]}; do
 done
 
 unclutter --timeout 1 & # Hide mouse arrow
-urxvtd -q -f # Daemonize urxvt
 $HOME/.config/polybar/launch.sh # Launch Polybar
 nextcloud & # Launch Nextcloud
-
-if [ "$(hostname)" == "desktop-arch" ]; then
-  # picom & # Window compositor
-  sxhkd -c "$HOME/.config/sxhkd/desktop-arch-sxhkdrc" &
-  # xss-lock -- /usr/bin/i3lock --nofork --no-unlock-indicator --color=000000 &
-  protonmail-bridge --no-window &
-  bspc monitor DP-2 -d 1 2
-  bspc monitor DP-1 -d 3 4 5 6
-  bspc monitor DP-3 -d 7 8 9 10
-  bspc config window_gap               2
-  bspc desktop -f 3
-elif [ "$(hostname)" == "mbp-arch" ]; then
-  vmware-user # For VMWare Fusion
-  sxhkd -c "$HOME/.config/sxhkd/mbp-arch-sxhkdrc" &
-  bspc monitor -d I II III IV V VI VII VIII IX X
-  bspc config window_gap               4
-fi
+# picom & # Window compositor
+sxhkd -c "$HOME/.config/sxhkd/desktop-arch-sxhkdrc" &
+# xss-lock -- /usr/bin/i3lock --nofork --no-unlock-indicator --color=000000 &
+protonmail-bridge --no-window &
+bspc monitor DP-2 -d 1 2
+bspc monitor DP-1 -d 3 4 5 6
+bspc monitor DP-3 -d 7 8 9 10
+bspc config window_gap               2
+bspc desktop -f 3
 
 bspc config border_width               2
 
