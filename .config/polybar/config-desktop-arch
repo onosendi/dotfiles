@@ -84,7 +84,7 @@ format-prefix = " "
 type = internal/cpu
 interval = 2
 label = " %percentage:1%%"
-format-prefix = ""
+format-prefix = " "
 format-prefix-foreground = ${colors.darkgrey}
 
 [module/bspwm]
