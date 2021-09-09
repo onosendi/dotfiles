@@ -7,6 +7,7 @@ STARTUP=(\
   unclutter
   nextcloud
   polybar
+  dunst
   vmware-user
   # picom
   feh
@@ -22,6 +23,7 @@ done
 unclutter --timeout 1 & # Hide mouse arrow
 $HOME/.config/polybar/launch.sh # Launch Polybar
 nextcloud & # Launch Nextcloud
+dunst &
 # picom & # Window compositor
 sxhkd -c "$HOME/.config/sxhkd/desktop-arch-sxhkdrc" &
 # xss-lock -- /usr/bin/i3lock --nofork --no-unlock-indicator --color=000000 &
