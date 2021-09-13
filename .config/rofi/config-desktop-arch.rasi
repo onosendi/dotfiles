@@ -1,6 +1,0 @@
-configuration {
-  theme: "~/.config/rofi/themes/gruvbox/gruvbox-dark.rasi";
-  font: "SF Mono 10";
-  width: 40;
-  lines: 15;
-}
