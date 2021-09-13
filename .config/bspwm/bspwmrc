@@ -25,7 +25,7 @@ $HOME/.config/polybar/launch.sh # Launch Polybar
 nextcloud & # Launch Nextcloud
 dunst &
 # picom & # Window compositor
-sxhkd -c "$HOME/.config/sxhkd/desktop-arch-sxhkdrc" &
+sxhkd -c "$HOME/.config/sxhkd/sxhkdrc" &
 # xss-lock -- /usr/bin/i3lock --nofork --no-unlock-indicator --color=000000 &
 protonmail-bridge --noninteractive &
 bspc monitor DP-2 -d 1 2
