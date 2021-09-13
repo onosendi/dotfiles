@@ -27,7 +27,7 @@ dunst &
 # picom & # Window compositor
 sxhkd -c "$HOME/.config/sxhkd/desktop-arch-sxhkdrc" &
 # xss-lock -- /usr/bin/i3lock --nofork --no-unlock-indicator --color=000000 &
-protonmail-bridge --no-window &
+protonmail-bridge --noninteractive &
 bspc monitor DP-2 -d 1 2
 bspc monitor DP-1 -d 3 4 5 6
 bspc monitor DP-3 -d 7 8 9 10
