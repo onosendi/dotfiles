@@ -30,7 +30,7 @@ border-bottom-size = 0
 border-color = #282828
 cursor-click = pointer
 cursor-scroll = ns-resize
-font-0 = "SF Mono:pixelsize=10;2"
+font-0 = "SF Mono Nerd Font:pixelsize=10;2"
 font-1 = "FontAwesome5Free:pixelsize=10;1"
 font-2 = "FontAwesome5Free:style=Solid:pixelsize=10;1"
 font-3 = "Material Icons:size=13;4"
@@ -39,12 +39,12 @@ height = 30
 line-size = 2
 module-margin-right = 3
 modules-left = bspwm
+modules-center = title
 padding-left = 0
 padding-right = 0
 offset-x = 0
 offset-y = 0
 width = 100%
-
 
 ; Left monitor.
 [bar/DP-2]
@@ -71,6 +71,12 @@ type = internal/fs
 internal = 25
 mount-0 = /
 label-mounted = %{F#83a598}%{F-} %percentage_used%%
+
+[module/title]
+type = internal/xwindow
+label-maxlen = 100
+format-foreground = ${colors.white}
+format = <label>
 
 [module/date]
 type = internal/date
