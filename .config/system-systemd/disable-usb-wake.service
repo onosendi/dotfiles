@@ -1,16 +1,17 @@
 [Unit]
 Description=Disable peripherals from waking computer
+After=home.mount
 
 [Service]
 Type=oneshot
 ExecStart=/bin/bash -c "\
-  echo UHC1 > /proc/acpi/wakeup; \
-  echo UHC2 > /proc/acpi/wakeup; \
-  echo USB3 > /proc/acpi/wakeup; \
-  echo UHC4 > /proc/acpi/wakeup; \
-  echo USB5 > /proc/acpi/wakeup; \
-  echo UHC6 > /proc/acpi/wakeup; \
-  echo UHC7 > /proc/acpi/wakeup; \
+  echo UHC1 >> /proc/acpi/wakeup; \
+  echo UHC2 >> /proc/acpi/wakeup; \
+  echo USB3 >> /proc/acpi/wakeup; \
+  echo UHC4 >> /proc/acpi/wakeup; \
+  echo USB5 >> /proc/acpi/wakeup; \
+  echo UHC6 >> /proc/acpi/wakeup; \
+  echo UHC7 >> /proc/acpi/wakeup; \
 "
 
 [Install]
