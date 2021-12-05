@@ -1,5 +1,6 @@
 configuration {
-  theme: "~/.config/rofi/themes/gruvbox/gruvbox-dark-hard.rasi";
   font: "SF Mono Nerd Font 11";
   lines: 15;
 }
+
+@theme "gruvbox-dark-hard"
