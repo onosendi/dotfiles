@@ -69,7 +69,7 @@ configure_dock() {
     defaults write com.apple.dock size-immutable -bool false
 
     # Set icon size in dock.
-    defaults write com.apple.dock tilesize -int 35
+    defaults write com.apple.dock tilesize -int 55
 
     # Show app switcher on all displays.
     defaults write com.apple.Dock appswitcher-all-displays -bool true
