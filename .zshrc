@@ -6,10 +6,11 @@
 source ~/.grml-zsh
 
 # Manage dotfiles.
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-alias global-dotfiles="/usr/bin/git --git-dir=$HOME/.global-dotfiles/ --work-tree=$HOME"
+alias dotfiles="/opt/homebrew/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias global-dotfiles="/opt/homebrew/bin/git --git-dir=$HOME/.global-dotfiles/ --work-tree=$HOME"
 
-alias vim="/usr/local/bin/nvim"
+alias vim="/opt/homebrew/bin/nvim"
+alias brew="sudo -Hu brew /opt/homebrew/bin/brew"
 
 ##
 # grml-zsh-config
@@ -21,7 +22,7 @@ zstyle ':vcs_info:*' unstagedstr '!'
 zstyle ':vcs_info:*' stagedstr '+'
 zstyle ':vcs_info:git*' formats "%{${fg[cyan]}%}[%{$reset_color%}%{${fg_bold[red]}%}%b%{$reset_color%}%{${fg_bold[yellow]}%}%m%u%c%{$reset_color%}%{${fg[cyan]}%}]%{$reset_color%} "
 
-source /usr/local/bin/virtualenvwrapper.sh
+source /opt/homebrew/bin/virtualenvwrapper.sh
 function virtual_env_prompt () {
   REPLY=${VIRTUAL_ENV+(${VIRTUAL_ENV:t}) }
 }
@@ -60,3 +61,5 @@ load-nvmrc() {
 }
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
+
+export PATH="/opt/homebrew/bin:$PATH"

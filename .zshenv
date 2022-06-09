@@ -9,9 +9,9 @@ if [ -d "$HOME/.android/android-sdk/platform-tools" ]; then
     export PATH="$HOME/.android/android-sdk/platform-tools:$PATH"
 fi
 
-if [ -d "/usr/local/sbin" ]; then
-    export PATH="/usr/local/sbin:$PATH"
-fi
+#if [ -d "/usr/local/sbin" ]; then
+#    export PATH="/usr/local/sbin:$PATH"
+#fi
 
 if [ -d "$HOME/.nvm" ]; then
     export NVM_DIR="$HOME/.nvm"
@@ -23,6 +23,10 @@ fi
 
 if [ -d "$HOME/.poetry/bin" ]; then
     export PATH="$HOME/.poetry/bin:$PATH"
+fi
+
+if [ -d "$HOME/homebrew/bin" ]; then
+    export PATH="$HOME/homebrew/bin:$PATH"
 fi
 
 # Configuration for virtualenv
