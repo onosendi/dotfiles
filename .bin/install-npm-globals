@@ -1,0 +1,10 @@
+#!/bin/bash
+
+npm i -g \
+typescript \
+typescript-language-server \
+vscode-langservers-extracted \
+pyright \
+bash-language-server \
+eslint_d \
+stylelint
