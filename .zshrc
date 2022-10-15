@@ -63,5 +63,3 @@ add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-
-source "$HOME/.zsh/pass-completion.zsh"
