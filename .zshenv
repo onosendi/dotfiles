@@ -9,6 +9,10 @@ if [ -d "$HOME/.android/android-sdk/platform-tools" ]; then
     export PATH="$HOME/.android/android-sdk/platform-tools:$PATH"
 fi
 
+if [ -d "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" ]; then
+    export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
+fi
+
 #if [ -d "/usr/local/sbin" ]; then
 #    export PATH="/usr/local/sbin:$PATH"
 #fi
