@@ -8,6 +8,7 @@ return {
       require("mason").setup()
       require("mason-lspconfig").setup({
         ensure_installed = {
+          "bashls",
           "eslint",
           "jsonls",
           "lua_ls",
