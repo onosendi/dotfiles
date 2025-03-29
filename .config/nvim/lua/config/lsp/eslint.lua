@@ -41,7 +41,6 @@ vim.lsp.config.eslint = {
   cmd = { "vscode-eslint-language-server", "--stdio" },
   filetypes = { "javascript", "typescript", "typescriptreact", "javascriptreact" },
   root_markers = { ".eslintrc.json", "package.json", "tsconfig.json", ".git" },
-  capabilities = require('cmp_nvim_lsp').default_capabilities(),
   settings = {
     codeAction = {
       disableRuleComment = {

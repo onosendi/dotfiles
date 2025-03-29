@@ -151,3 +151,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     configure_diagnostics()
   end
 })
+
+vim.lsp.config('*', {
+  capabilities = require('cmp_nvim_lsp').default_capabilities(),
+})
