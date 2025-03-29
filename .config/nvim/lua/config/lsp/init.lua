@@ -1,7 +1,0 @@
-require("config.lsp.global")
-require("config.lsp.bash")
-require("config.lsp.eslint")
-require("config.lsp.json")
-require("config.lsp.lua")
-require("config.lsp.python")
-require("config.lsp.typescript")
