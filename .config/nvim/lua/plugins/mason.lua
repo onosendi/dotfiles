@@ -7,11 +7,12 @@ return {
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = { 
+        ensure_installed = {
+          "eslint",
           "jsonls",
           "lua_ls",
+          "pyright",
           "ts_ls",
-          "eslint",
         },
         automatic_installation = true,
       })
