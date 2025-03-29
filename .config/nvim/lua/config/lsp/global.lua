@@ -58,7 +58,7 @@ local function set_global_keymaps(client, bufnr)
     desc = "Go to implementation",
     bufnr = bufnr,
   })
-  
+
   -- Show signature help
   utils.set_keymap({
     key = '<C-k>',
@@ -70,7 +70,7 @@ local function set_global_keymaps(client, bufnr)
   -- Rename symbol
   utils.set_keymap({
     key = '<leader>rn',
-    cmd = vim.lsp.buf.rename, 
+    cmd = vim.lsp.buf.rename,
     desc = "Rename symbol",
     bufnr = bufnr,
   })
@@ -99,18 +99,22 @@ local function set_global_keymaps(client, bufnr)
     bufnr = bufnr,
   })
 
-  -- Go to next diagnostic
+  -- Go to previous diagnostic
   utils.set_keymap({
     key = '[d',
-    cmd = vim.diagnostic.goto_prev,
+    cmd = function ()
+      vim.diagnostic.jump({ count = -1 })
+    end,
     desc = "Go to previous diagnostic",
     bufnr = bufnr,
   })
 
-  -- Go to previous diagnostic
+  -- Go to next diagnostic
   utils.set_keymap({
     key = ']d',
-    cmd = vim.diagnostic.goto_next,
+    cmd = function ()
+      vim.diagnostic.jump({ count = 1 })
+    end,
     desc = "Go to next diagnostic",
     bufnr = bufnr,
   })

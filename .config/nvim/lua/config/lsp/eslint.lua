@@ -1,17 +1,28 @@
 local utils = require('utils');
 
-local function set_eslint_keymaps(client, bufnr)
+local function set_eslint_keymaps(bufnr)
   utils.set_keymap({
     key = '<leader>fa',
     cmd = function()
       vim.lsp.buf.code_action({
         apply = true,
-        context = { only = { "source.fixAll.eslint" } }
+        context = {
+          diagnostics = {},
+          only = { "source.fixAll" },
+        }
       })
     end,
     desc = "Fix all ESLint issues",
     bufnr = bufnr,
   })
+end
+
+local function get_workspace_folder()
+  local root = vim.fn.getcwd()
+  return {
+    name = vim.fn.fnamemodify(root, ":t"),
+    uri = vim.uri_from_fname(root),
+  }
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -21,7 +32,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local bufnr = args.buf
 
     if client.name == "eslint" then
-      set_eslint_keymaps(client, bufnr)
+      set_eslint_keymaps(bufnr)
     end
   end
 })
@@ -29,7 +40,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.lsp.config.eslint = {
   cmd = { "vscode-eslint-language-server", "--stdio" },
   filetypes = { "javascript", "typescript", "typescriptreact", "javascriptreact" },
-  root_markers = { ".eslintrc.json" },
+  root_markers = { ".eslintrc.json", "package.json", "tsconfig.json", ".git" },
   capabilities = require('cmp_nvim_lsp').default_capabilities(),
   settings = {
     codeAction = {
@@ -59,9 +70,8 @@ vim.lsp.config.eslint = {
     run = "onType",
     useESLintClass = false,
     validate = "on",
-    workingDirectory = {
-      mode = "location"
-    },
+    workingDirectory = { mode = "location" },
+    workspaceFolder = get_workspace_folder(),
   }
 }
 

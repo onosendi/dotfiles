@@ -20,7 +20,11 @@ local function set_typescript_keymaps(client, bufnr)
     cmd = function()
       vim.lsp.buf.code_action({
         apply = true,
-        context = { only = { "source.removeUnusedImports.ts" } }
+        context = {
+          diagnostics = {},
+          ---@diagnostic disable-next-line: assign-type-mismatch
+          only = { "source.removeUnusedImports.ts" },
+        }
       })
     end,
     desc = "Remove Unused Imports",
@@ -33,7 +37,11 @@ local function set_typescript_keymaps(client, bufnr)
     cmd = function()
       vim.lsp.buf.code_action({
         apply = true,
-        context = { only = { "source.addMissingImports.ts" } }
+        context = {
+          diagnostics = {},
+          ---@diagnostic disable-next-line: assign-type-mismatch
+          only = { "source.addMissingImports.ts" },
+        }
       })
     end,
     desc = "Add Missing Imports",
