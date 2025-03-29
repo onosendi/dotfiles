@@ -1,6 +1,6 @@
-vim.lsp.config.bashls = {
+vim.lsp.config.bash = {
   cmd = { "bash-language-server", "start"  },
   filetypes = { "sh", "bash", "zsh" },
 }
 
-vim.lsp.enable("bashls")
+vim.lsp.enable("bash")

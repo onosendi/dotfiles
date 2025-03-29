@@ -118,6 +118,15 @@ local function set_global_keymaps(client, bufnr)
     desc = "Go to next diagnostic",
     bufnr = bufnr,
   })
+
+  -- Format document
+  utils.set_keymap({
+    key = '<leader>fa',
+    cmd = function ()
+      vim.lsp.buf.format({ async = true })
+    end,
+    desc = "Format document"
+  })
 end
 
 local function configure_diagnostics()
