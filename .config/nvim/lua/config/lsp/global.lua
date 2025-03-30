@@ -125,7 +125,8 @@ local function set_global_keymaps(client, bufnr)
     cmd = function ()
       vim.lsp.buf.format({ async = true })
     end,
-    desc = "Format document"
+    desc = "Format document",
+    bufnr = bufnr,
   })
 end
 

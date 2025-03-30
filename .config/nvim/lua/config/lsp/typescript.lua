@@ -57,7 +57,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local bufnr = args.buf
 
     if client.name == "typescript" then
-      error("foo")
       set_typescript_keymaps(client, bufnr)
     end
   end
