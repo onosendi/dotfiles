@@ -102,7 +102,7 @@ local function set_global_keymaps(client, bufnr)
   -- Go to previous diagnostic
   utils.set_keymap({
     key = '[d',
-    cmd = function ()
+    cmd = function()
       vim.diagnostic.jump({ count = -1 })
     end,
     desc = "Go to previous diagnostic",
@@ -112,7 +112,7 @@ local function set_global_keymaps(client, bufnr)
   -- Go to next diagnostic
   utils.set_keymap({
     key = ']d',
-    cmd = function ()
+    cmd = function()
       vim.diagnostic.jump({ count = 1 })
     end,
     desc = "Go to next diagnostic",
@@ -122,7 +122,7 @@ local function set_global_keymaps(client, bufnr)
   -- Format document
   utils.set_keymap({
     key = '<leader>fa',
-    cmd = function ()
+    cmd = function()
       vim.lsp.buf.format({ async = true })
     end,
     desc = "Format document",

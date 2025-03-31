@@ -10,10 +10,10 @@ return {
       },
       options = {
         theme = 'dracula',
-        component_separators = {'', ''},
+        component_separators = { '', '' },
       },
       sections = {
-        lualine_x = {'fileformat', 'filetype'},
+        lualine_x = { 'fileformat', 'filetype' },
       },
     }
   end,

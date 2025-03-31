@@ -18,21 +18,21 @@ local jsts = {
     namr = "Try Catch",
     dscr = "Try catch block",
   }, {
-    t({"try {", "  "}),
+    t({ "try {", "  " }),
     i(1),
-    t({"", "} catch (error) {", "  "}),
+    t({ "", "} catch (error) {", "  " }),
     i(2, ""),
-    t({"", "}"}),
+    t({ "", "}" }),
   }),
   s({
     trig = "iiafe",
     namr = "Immediately Invoked Async Function Expression",
     dscr = "Async IIFE pattern",
   }, {
-    t({"(async () => {"}),
-    t({"", "  "}),
+    t({ "(async () => {" }),
+    t({ "", "  " }),
     i(1),
-    t({"", "})();"}),
+    t({ "", "})();" }),
   }),
   s({
     trig = "af",
@@ -42,9 +42,9 @@ local jsts = {
     t("("),
     i(1),
     t(") => {"),
-    t({"", "  "}),
+    t({ "", "  " }),
     i(2),
-    t({"", "}"}),
+    t({ "", "}" }),
   }),
   s({
     trig = "aaf",
@@ -54,9 +54,9 @@ local jsts = {
     t("async ("),
     i(1),
     t(") => {"),
-    t({"", "  "}),
+    t({ "", "  " }),
     i(2),
-    t({"", "}"}),
+    t({ "", "}" }),
   }),
   s({
     trig = "fn",
@@ -67,9 +67,9 @@ local jsts = {
     i(1),
     t("("),
     i(2),
-    t({") {", "  "}),
+    t({ ") {", "  " }),
     i(3),
-    t({"", "}"}),
+    t({ "", "}" }),
   })
 }
 

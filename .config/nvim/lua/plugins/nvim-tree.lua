@@ -36,9 +36,29 @@ return {
     })
   end,
   keys = {
-    { "<leader>ee", ":NvimTreeToggle<CR>", mode = { "n" }, desc = "Toggle file explorer" },
-    { "<leader>ef", ":NvimTreeFindFileToggle<CR>", mode = { "n" }, desc = "Toggle file explorer on current file" },
-    { "<leader>ec", ":NvimTreeCollapse<CR>", mode = { "n" }, desc = "Collapse file explorer" },
-    { "<leader>er", ":NvimTreeRefresh<CR>", mode = { "n" }, desc = "Refresh file explorer" },
+    {
+      "<leader>ee",
+      ":NvimTreeToggle<CR>",
+      mode = { "n" },
+      desc = "Toggle file explorer",
+    },
+    {
+      "<leader>ef",
+      ":NvimTreeFindFileToggle<CR>",
+      mode = { "n" },
+      desc = "Toggle file explorer on current file",
+    },
+    {
+      "<leader>ec",
+      ":NvimTreeCollapse<CR>",
+      mode = { "n" },
+      desc = "Collapse file explorer",
+    },
+    {
+      "<leader>er",
+      ":NvimTreeRefresh<CR>",
+      mode = { "n" },
+      desc = "Refresh file explorer"
+    },
   },
 }

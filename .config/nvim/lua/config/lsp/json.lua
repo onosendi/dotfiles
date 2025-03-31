@@ -10,7 +10,7 @@ vim.lsp.config.json = {
   commands = {
     Format = {
       function()
-        vim.lsp.buf.format({ range = { {0, 0}, {vim.fn.line("$"), 0} } })
+        vim.lsp.buf.format({ range = { { 0, 0 }, { vim.fn.line("$"), 0 } } })
       end
     }
   }

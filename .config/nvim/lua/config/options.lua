@@ -91,6 +91,6 @@ vim.opt.guicursor = ""
 
 -- Change the terminal's cursor
 vim.opt.guicursor = {
-  "n-v-c:block",  -- Block in normal mode
-  "i:ver25",      -- Vertical line in insert mode
+  "n-v-c:block", -- Block in normal mode
+  "i:ver25",     -- Vertical line in insert mode
 }

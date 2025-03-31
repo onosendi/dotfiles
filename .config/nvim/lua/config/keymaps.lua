@@ -23,5 +23,3 @@ vim.keymap.set('t', '<C-o>', '<C-\\><C-n>')
 
 -- Make all windows equal size
 vim.keymap.set('n', '<leader>rw', '<C-W>=')
-
-vim.lsp.enable({ ts_ls });
