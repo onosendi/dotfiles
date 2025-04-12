@@ -7,7 +7,6 @@ source ~/.grml-zsh
 
 # Manage dotfiles.
 alias dotfiles="/opt/homebrew/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-alias global-dotfiles="/opt/homebrew/bin/git --git-dir=$HOME/.global-dotfiles/ --work-tree=$HOME"
 
 alias vim="/opt/homebrew/bin/nvim"
 alias brew="sudo -Hu brew /opt/homebrew/bin/brew"
