@@ -170,6 +170,8 @@ output.null = "#808080"
 # You can add your favorite queries here. They will be available in the
 # REPL when you type `\f` or `\f <query_name>`.
 [favorite_queries]
+st = "SHOW TABLES"
+pl = "SHOW FULL PROCESSLIST"
 # example = "SELECT * FROM example_table WHERE id = 1"
 
 # Initial commands to execute when connecting to any database.
