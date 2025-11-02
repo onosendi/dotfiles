@@ -1,0 +1,372 @@
+#!/usr/bin/env bash
+
+SCRIPT_NAME="$(basename "$0")"
+CONFIG_DIR="$HOME/.config/devtunnel"
+PORT_MAP_FILE="$CONFIG_DIR/port-map"
+APPS_DIR="$CONFIG_DIR/apps"
+
+load_port_map() {
+  if [[ ! -f "$PORT_MAP_FILE" ]]; then
+    echo "Error: Port map file not found: $PORT_MAP_FILE" >&2
+    echo "Please create the file with format: Description|LocalPort|RemoteHost|RemotePort" >&2
+    exit 1
+  fi
+  
+  port_map=()
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    # Skip empty lines and comments
+    [[ -z "$line" || "$line" =~ ^[[:space:]]*# ]] && continue
+    
+    port_map+=("$line")
+  done < "$PORT_MAP_FILE"
+  
+  if [[ ${#port_map[@]} -eq 0 ]]; then
+    echo "Error: No port mappings found in $PORT_MAP_FILE" >&2
+    exit 1
+  fi
+}
+
+test_config() {
+  load_port_map
+  local quiet=0
+  
+  # Parse flags
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --quiet|-q)
+        quiet=1
+        shift
+        ;;
+      *)
+        echo "Error: Unknown option: $1" >&2
+        echo "Usage: $SCRIPT_NAME test [--quiet]"
+        return 1
+        ;;
+    esac
+  done
+  
+  local has_errors=0
+  
+  # Arrays to track values
+  declare -A descriptions
+  declare -A local_ports
+  declare -A remote_endpoints
+  
+  for mapping in "${port_map[@]}"; do
+    IFS='|' read -r desc local_port remote_host remote_port <<< "$mapping"
+    
+    # Check for duplicate descriptions
+    if [[ -n "${descriptions[$desc]}" ]]; then
+      echo "ERROR: Duplicate description: '$desc'"
+      has_errors=1
+    fi
+    descriptions[$desc]=1
+    
+    # Check for duplicate local ports
+    if [[ -n "${local_ports[$local_port]}" ]]; then
+      echo "ERROR: Duplicate local port: $local_port (used by '$desc' and '${local_ports[$local_port]}')"
+      has_errors=1
+    fi
+    local_ports[$local_port]="$desc"
+    
+    # Check for duplicate remote endpoints (host:port combination)
+    remote_endpoint="$remote_host:$remote_port"
+    if [[ -n "${remote_endpoints[$remote_endpoint]}" ]]; then
+      echo "ERROR: Duplicate remote endpoint: $remote_endpoint (used by '$desc' and '${remote_endpoints[$remote_endpoint]}')"
+      has_errors=1
+    fi
+    remote_endpoints[$remote_endpoint]="$desc"
+  done
+  
+  if [[ $has_errors -eq 0 ]]; then
+    if [[ $quiet -eq 0 ]]; then
+      echo "✓ All tests passed!"
+      echo "  - ${#descriptions[@]} unique descriptions"
+      echo "  - ${#local_ports[@]} unique local ports"
+      echo "  - ${#remote_endpoints[@]} unique remote endpoints"
+    fi
+    return 0
+  else
+    [[ $quiet -eq 0 ]] && echo ""
+    echo "✗ Configuration has errors"
+    return 1
+  fi
+}
+
+list_tunnels() {
+  test_config --quiet
+  printf "%-30s %-12s %-20s %-12s\n" "Description" "Local Port" "Remote Host" "Remote Port"
+  printf "%-30s %-12s %-20s %-12s\n" "-----------" "----------" "-----------" "-----------"
+  for mapping in "${port_map[@]}"; do
+    IFS='|' read -r desc local_port remote_host remote_port <<< "$mapping"
+    printf "%-30s %-12s %-20s %-12s\n" "$desc" "$local_port" "$remote_host" "$remote_port"
+  done
+}
+
+find_tunnel_by_name() {
+  local name="$1"
+  for mapping in "${port_map[@]}"; do
+    IFS='|' read -r desc local_port remote_host remote_port <<< "$mapping"
+    if [[ "$desc" == "$name" ]]; then
+      echo "$local_port|$remote_host|$remote_port"
+      return 0
+    fi
+  done
+  return 1
+}
+
+check_port_in_use() {
+  local port="$1"
+  lsof -i ":$port" -sTCP:LISTEN -t >/dev/null 2>&1
+}
+
+kill_port() {
+  local port="$1"
+  local pids=$(lsof -i ":$port" -sTCP:LISTEN -t 2>/dev/null)
+  if [[ -n "$pids" ]]; then
+    echo "$pids" | xargs kill 2>/dev/null
+    return 0
+  fi
+  return 1
+}
+
+start_app() {
+  local app_name="$1"
+  local server="${2:-dev}"
+  local app_file="$APPS_DIR/$app_name"
+  
+  # Test config first
+  if ! test_config --quiet; then
+    echo "Cannot start app: configuration has errors" >&2
+    exit 1
+  fi
+  
+  # Check if app config exists
+  if [[ ! -f "$app_file" ]]; then
+    echo "Error: App config not found: $app_file" >&2
+    echo "Available apps:" >&2
+    if [[ -d "$APPS_DIR" ]]; then
+      ls -1 "$APPS_DIR" 2>/dev/null || echo "  (none)" >&2
+    else
+      echo "  (none - directory doesn't exist)" >&2
+    fi
+    exit 1
+  fi
+  
+  echo "Starting tunnels for app: $app_name"
+  echo "Using server: $server"
+  echo ""
+  
+  # Read tunnel names from app config
+  while IFS= read -r tunnel_name || [[ -n "$tunnel_name" ]]; do
+    # Skip empty lines and comments
+    [[ -z "$tunnel_name" || "$tunnel_name" =~ ^[[:space:]]*# ]] && continue
+    
+    # Find tunnel configuration
+    tunnel_info=$(find_tunnel_by_name "$tunnel_name")
+    if [[ $? -ne 0 ]]; then
+      echo "Warning: Tunnel not found in port-map: $tunnel_name" >&2
+      continue
+    fi
+    
+    IFS='|' read -r local_port remote_host remote_port <<< "$tunnel_info"
+    
+    # Check if port is already in use
+    if check_port_in_use "$local_port"; then
+      echo "Skipping: $tunnel_name (port $local_port already in use)"
+      continue
+    fi
+    
+    # Start SSH tunnel in background
+    echo "Starting: $tunnel_name ($local_port -> $remote_host:$remote_port)"
+    
+    # Capture stderr to check for errors
+    error_output=$(ssh -f -N -L "$local_port:$remote_host:$remote_port" "$server" 2>&1)
+    ssh_exit_code=$?
+    
+    if [[ $ssh_exit_code -eq 0 ]] && [[ ! "$error_output" =~ "Address already in use" ]] && [[ ! "$error_output" =~ "cannot listen" ]]; then
+      echo "  ✓ Started successfully"
+    else
+      echo "  ✗ Failed to start" >&2
+      if [[ -n "$error_output" ]]; then
+        echo "     $error_output" >&2
+      fi
+    fi
+  done < "$app_file"
+  
+  echo ""
+  echo "All tunnels processed for $app_name"
+}
+
+stop_app() {
+  local app_name="$1"
+  local app_file="$APPS_DIR/$app_name"
+  
+  # Test config first
+  if ! test_config --quiet; then
+    echo "Cannot stop app: configuration has errors" >&2
+    exit 1
+  fi
+  
+  # Check if app config exists
+  if [[ ! -f "$app_file" ]]; then
+    echo "Error: App config not found: $app_file" >&2
+    echo "Available apps:" >&2
+    if [[ -d "$APPS_DIR" ]]; then
+      ls -1 "$APPS_DIR" 2>/dev/null || echo "  (none)" >&2
+    else
+      echo "  (none - directory doesn't exist)" >&2
+    fi
+    exit 1
+  fi
+  
+  echo "Stopping tunnels for app: $app_name"
+  echo ""
+  
+  local stopped_count=0
+  local not_running_count=0
+  
+  # Read tunnel names from app config
+  while IFS= read -r tunnel_name || [[ -n "$tunnel_name" ]]; do
+    # Skip empty lines and comments
+    [[ -z "$tunnel_name" || "$tunnel_name" =~ ^[[:space:]]*# ]] && continue
+    
+    # Find tunnel configuration
+    tunnel_info=$(find_tunnel_by_name "$tunnel_name")
+    if [[ $? -ne 0 ]]; then
+      echo "Warning: Tunnel not found in port-map: $tunnel_name" >&2
+      continue
+    fi
+    
+    IFS='|' read -r local_port remote_host remote_port <<< "$tunnel_info"
+    
+    # Try to kill the port
+    if kill_port "$local_port"; then
+      echo "Stopped: $tunnel_name (port $local_port)"
+      ((stopped_count++))
+    else
+      echo "Not running: $tunnel_name (port $local_port)"
+      ((not_running_count++))
+    fi
+  done < "$app_file"
+  
+  echo ""
+  echo "Summary: $stopped_count stopped, $not_running_count not running"
+}
+
+stop_all() {
+  # Test config first
+  if ! test_config --quiet; then
+    echo "Cannot stop all: configuration has errors" >&2
+    exit 1
+  fi
+  
+  echo "Stopping all tunnels from port-map"
+  echo ""
+  
+  local stopped_count=0
+  local not_running_count=0
+  
+  for mapping in "${port_map[@]}"; do
+    IFS='|' read -r desc local_port remote_host remote_port <<< "$mapping"
+    
+    # Try to kill the port
+    if kill_port "$local_port"; then
+      echo "Stopped: $desc (port $local_port)"
+      ((stopped_count++))
+    else
+      echo "Not running: $desc (port $local_port)"
+      ((not_running_count++))
+    fi
+  done
+  
+  echo ""
+  echo "Summary: $stopped_count stopped, $not_running_count not running"
+}
+
+show_help() {
+  echo "Usage: $SCRIPT_NAME [command] [options]"
+  echo ""
+  echo "Commands:"
+  echo "  start <app> [--server <server>]  Start tunnels for an app"
+  echo "  stop <app>                        Stop tunnels for an app"
+  echo "  stop-all                          Stop all tunnels in port-map"
+  echo "  list, l                           List all available port forwards"
+  echo "  test, t [--quiet]                 Test configuration for duplicates"
+  echo "  help, --help, -h                  Show this help"
+  echo ""
+  echo "Examples:"
+  echo "  $SCRIPT_NAME start sms-noting"
+  echo "  $SCRIPT_NAME start sms-noting --server prod"
+  echo "  $SCRIPT_NAME stop sms-noting"
+  echo "  $SCRIPT_NAME stop-all"
+  echo "  $SCRIPT_NAME list"
+  echo "  $SCRIPT_NAME test"
+  echo ""
+  echo "Configuration:"
+  echo "  Port map: $PORT_MAP_FILE"
+  echo "  Apps dir: $APPS_DIR"
+}
+
+# Main script logic
+case "${1:-}" in
+  start)
+    shift
+    app_name="${1:-}"
+    if [[ -z "$app_name" ]]; then
+      echo "Error: App name required" >&2
+      echo "Usage: $SCRIPT_NAME start <app> [--server <server>]" >&2
+      exit 1
+    fi
+    shift
+    
+    # Parse optional --server flag
+    server="dev"
+    while [[ $# -gt 0 ]]; do
+      case "$1" in
+        --server|-s)
+          server="${2:-}"
+          if [[ -z "$server" ]]; then
+            echo "Error: --server requires a value" >&2
+            exit 1
+          fi
+          shift 2
+          ;;
+        *)
+          echo "Error: Unknown option: $1" >&2
+          exit 1
+          ;;
+      esac
+    done
+    
+    start_app "$app_name" "$server"
+    ;;
+  stop)
+    shift
+    app_name="${1:-}"
+    if [[ -z "$app_name" ]]; then
+      echo "Error: App name required" >&2
+      echo "Usage: $SCRIPT_NAME stop <app>" >&2
+      exit 1
+    fi
+    stop_app "$app_name"
+    ;;
+  stop-all)
+    stop_all
+    ;;
+  test|t)
+    shift
+    test_config "$@"
+    ;;
+  list|l)
+    shift
+    list_tunnels
+    ;;
+  help|--help|-h)
+    show_help
+    ;;
+  *)
+    show_help
+    exit 1
+    ;;
+esac
