@@ -1,0 +1,39 @@
+layout {
+    tab name="code" focus=true hide_floating_panes=true {
+        pane
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+    }
+    tab name="run" hide_floating_panes=true {
+        pane split_direction="vertical" {
+            pane size="50%"
+            pane size="50%" {
+                pane size="50%"
+                pane size="50%"
+            }
+        }
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+    }
+    tab name="database" hide_floating_panes=true {
+        pane
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+    }
+    tab name="test" hide_floating_panes=true {
+        pane
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+    }
+    tab name="remote" hide_floating_panes=true {
+        pane
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+    }
+}
+
