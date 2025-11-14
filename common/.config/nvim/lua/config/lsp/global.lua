@@ -4,7 +4,32 @@ local function set_global_keymaps(client, bufnr)
   -- Restart LSP
   utils.set_keymap({
     key = '<leader>lr',
-    cmd = ":LspRestart<CR>",
+    cmd = function()
+      local bufnr = vim.api.nvim_get_current_buf()
+      local clients = vim.lsp.get_clients({ bufnr = bufnr })
+
+      if #clients == 0 then
+        vim.api.nvim_exec_autocmds("FileType", { group = "MyLsp", buffer = bufnr })
+        return
+      end
+
+      for _, c in ipairs(clients) do
+        local attached_buffers = vim.tbl_keys(c.attached_buffers) ---@type integer[]
+        local config = c.config
+        vim.lsp.stop_client(c.id, true)
+        vim.defer_fn(function()
+          local id = vim.lsp.start(config)
+          if id then
+            for _, b in ipairs(attached_buffers) do
+              vim.lsp.buf_attach_client(b, id)
+            end
+            vim.notify(string.format("Lsp `%s` has been restarted.", config.name))
+          else
+            vim.notify(string.format("Error restarting `%s`.", config.name), vim.log.levels.ERROR)
+          end
+        end, 600)
+      end
+    end,
     desc = "Restart LSP server",
     bufnr = bufnr,
   })

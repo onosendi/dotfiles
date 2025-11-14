@@ -288,7 +288,7 @@ show_help() {
   echo "Usage: $SCRIPT_NAME [command] [options]"
   echo ""
   echo "Commands:"
-  echo "  start <app> [--server <server>]  Start tunnels for an app"
+  echo "  start <app> [--server <server>]   Start tunnels for an app"
   echo "  stop <app>                        Stop tunnels for an app"
   echo "  stop-all                          Stop all tunnels in port-map"
   echo "  list, l                           List all available port forwards"

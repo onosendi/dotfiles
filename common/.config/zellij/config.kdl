@@ -49,6 +49,23 @@ keybinds clear-defaults=true {
         bind "o" { MoveTab "right"; }
         bind "r" { SwitchToMode "renametab"; TabNameInput 0; }
     }
+
+    scroll {
+        bind "e" { EditScrollback; SwitchToMode "normal"; }
+        bind "s" { SwitchToMode "entersearch"; SearchInput 0; }
+    }
+
+    shared_among "scroll" "search" {
+        bind "Ctrl b" { PageScrollUp; }
+        bind "Ctrl f" { PageScrollDown; }
+        bind "j" { ScrollDown; }
+        bind "k" { ScrollUp; }
+        bind "Alt m" { SwitchToMode "normal"; }
+    }
+
+    shared_except "locked" "scroll" {
+        bind "Alt m" { SwitchToMode "scroll"; }
+    }
 }
 
 themes {

@@ -1,19 +1,35 @@
 local utils = require('utils');
 
 local function set_eslint_keymaps(bufnr)
+  -- utils.set_keymap({
+  --   key = '<leader>fa',
+  --   cmd = function()
+  --     vim.lsp.buf.code_action({
+  --       apply = true,
+  --       context = {
+  --         diagnostics = {},
+  --         only = { "source.fixAll" },
+  --       }
+  --     })
+  --   end,
+  --   desc = "Fix all ESLint issues",
+  --   bufnr = bufnr,
+  -- })
   utils.set_keymap({
-    key = '<leader>fa',
+    key = "<leader>fa",
+    desc = "Fix all ESLint issues",
+    bufnr = bufnr,
     cmd = function()
       vim.lsp.buf.code_action({
         apply = true,
-        context = {
-          diagnostics = {},
-          only = { "source.fixAll" },
-        }
+        context = { diagnostics = {}, only = { "source.fixAll" } },
+
+        -- Fix having to choose between TS/ESLint fixes.
+        filter = function(a)
+          return a.kind == "source.fixAll.eslint" or (a.title and a.title:lower():find("eslint", 1, true) ~= nil)
+        end,
       })
     end,
-    desc = "Fix all ESLint issues",
-    bufnr = bufnr,
   })
 end
 
