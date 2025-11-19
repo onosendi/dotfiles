@@ -76,4 +76,6 @@ local jsts = {
 ls.add_snippets(nil, {
   javascript = jsts,
   typescript = jsts,
+  javascriptreact = jsts,
+  typescriptreact = jsts,
 })
