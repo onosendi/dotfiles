@@ -6,7 +6,7 @@ return {
     {
       "windwp/nvim-ts-autotag",
       config = function()
-        require("nvim-ts-autotag").setup({})
+        require("nvim-ts-autotag").setup()
       end,
     },
   },
@@ -22,9 +22,6 @@ return {
         enable = true,
       },
       indent = {
-        enable = true,
-      },
-      autotag = {
         enable = true,
       },
       ensure_installed = {
