@@ -23,3 +23,7 @@ vim.keymap.set('t', '<C-o>', '<C-\\><C-n>')
 
 -- Make all windows equal size
 vim.keymap.set('n', '<leader>rw', '<C-W>=')
+
+vim.keymap.set("n", "<leader>fa", function()
+  _G.FormatDocument()
+end, { desc = "Format document", silent = true })

@@ -1,53 +1,5 @@
 local utils = require('utils');
 
-local function set_eslint_keymaps(bufnr)
-  -- utils.set_keymap({
-  --   key = '<leader>fa',
-  --   cmd = function()
-  --     vim.lsp.buf.code_action({
-  --       apply = true,
-  --       context = {
-  --         diagnostics = {},
-  --         only = { "source.fixAll" },
-  --       }
-  --     })
-  --   end,
-  --   desc = "Fix all ESLint issues",
-  --   bufnr = bufnr,
-  -- })
-  utils.set_keymap({
-    key = "<leader>fa",
-    desc = "Fix all ESLint issues",
-    bufnr = bufnr,
-    cmd = function()
-      vim.lsp.buf.code_action({
-        apply = true,
-        context = {
-          diagnostics = {},
-          only = { "source.fixAll.eslint" },
-        },
-      })
-    end,
-  })
-
-  -- utils.set_keymap({
-  --   key = "<leader>fa",
-  --   desc = "Fix all ESLint issues",
-  --   bufnr = bufnr,
-  --   cmd = function()
-  --     vim.lsp.buf.code_action({
-  --       apply = true,
-  --       context = { diagnostics = {}, only = { "source.fixAll" } },
-  --
-  --       -- Fix having to choose between TS/ESLint fixes.
-  --       filter = function(a)
-  --         return a.kind == "source.fixAll.eslint" or (a.title and a.title:lower():find("eslint", 1, true) ~= nil)
-  --       end,
-  --     })
-  --   end,
-  -- })
-end
-
 local function get_workspace_folder()
   local root = vim.fn.getcwd()
   return {
@@ -55,18 +7,6 @@ local function get_workspace_folder()
     uri = vim.uri_from_fname(root),
   }
 end
-
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('eslint.lsp', { clear = true }),
-  callback = function(args)
-    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-    local bufnr = args.buf
-
-    if client.name == "eslint" then
-      set_eslint_keymaps(bufnr)
-    end
-  end
-})
 
 vim.lsp.config.eslint = {
   cmd = { "vscode-eslint-language-server", "--stdio" },

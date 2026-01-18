@@ -20,6 +20,36 @@ local function format_with_prettier(file)
   return false
 end
 
+_G.FormatDocument = function()
+  local ft = vim.bo.filetype
+  local file = vim.api.nvim_buf_get_name(0)
+
+  if ft == "javascript" or ft == "javascriptreact" or ft == "typescript" or ft == "typescriptreact" then
+    for _, c in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+      if c.name == "eslint" then
+        vim.lsp.buf.code_action({
+          apply = true,
+          context = { diagnostics = {}, only = { "source.fixAll.eslint" } },
+        })
+        return
+      end
+    end
+  end
+
+  if ft == "json" or ft == "jsonc" or ft == "yaml" or ft == "yml" then
+    vim.cmd("silent write")
+    local ok = format_with_prettier(file)
+    if ok then
+      vim.cmd("edit!")
+    else
+      vim.notify("No prettier/prettierd/npx found to format this file", vim.log.levels.WARN)
+    end
+    return
+  end
+
+  vim.lsp.buf.format({ async = true })
+end
+
 local function set_global_keymaps(client, bufnr)
   -- Restart LSP
   utils.set_keymap({
@@ -162,41 +192,6 @@ local function set_global_keymaps(client, bufnr)
     end,
     desc = "Go to next diagnostic",
     bufnr = bufnr,
-  })
-
-  -- Format document
-  -- utils.set_keymap({
-  --   key = '<leader>fa',
-  --   cmd = function()
-  --     vim.lsp.buf.format({ async = true })
-  --   end,
-  --   desc = "Format document",
-  --   bufnr = bufnr,
-  -- })
-
-  utils.set_keymap({
-    key = "<leader>fa",
-    desc = "Format document",
-    bufnr = bufnr,
-    cmd = function()
-      local ft = vim.bo.filetype
-      local file = vim.api.nvim_buf_get_name(0)
-
-      -- Use Prettier for formats where you want Prettier's canonical output
-      if ft == "json" or ft == "jsonc" or ft == "yaml" or ft == "yml" then
-        vim.cmd("silent write")
-        local ok = format_with_prettier(file)
-        if ok then
-          vim.cmd("edit!")
-        else
-          vim.notify("No prettier/prettierd/npx found to format this file", vim.log.levels.WARN)
-        end
-        return
-      end
-
-      -- Everything else: whatever LSP formatting you normally use
-      vim.lsp.buf.format({ async = true })
-    end,
   })
 end
 

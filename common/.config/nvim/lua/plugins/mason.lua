@@ -14,6 +14,7 @@ return {
           "lua_ls",
           "pyright",
           "ts_ls",
+          "yamlls",
         },
         automatic_installation = true,
       })
