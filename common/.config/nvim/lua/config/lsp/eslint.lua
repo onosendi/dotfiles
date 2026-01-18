@@ -22,15 +22,30 @@ local function set_eslint_keymaps(bufnr)
     cmd = function()
       vim.lsp.buf.code_action({
         apply = true,
-        context = { diagnostics = {}, only = { "source.fixAll" } },
-
-        -- Fix having to choose between TS/ESLint fixes.
-        filter = function(a)
-          return a.kind == "source.fixAll.eslint" or (a.title and a.title:lower():find("eslint", 1, true) ~= nil)
-        end,
+        context = {
+          diagnostics = {},
+          only = { "source.fixAll.eslint" },
+        },
       })
     end,
   })
+
+  -- utils.set_keymap({
+  --   key = "<leader>fa",
+  --   desc = "Fix all ESLint issues",
+  --   bufnr = bufnr,
+  --   cmd = function()
+  --     vim.lsp.buf.code_action({
+  --       apply = true,
+  --       context = { diagnostics = {}, only = { "source.fixAll" } },
+  --
+  --       -- Fix having to choose between TS/ESLint fixes.
+  --       filter = function(a)
+  --         return a.kind == "source.fixAll.eslint" or (a.title and a.title:lower():find("eslint", 1, true) ~= nil)
+  --       end,
+  --     })
+  --   end,
+  -- })
 end
 
 local function get_workspace_folder()

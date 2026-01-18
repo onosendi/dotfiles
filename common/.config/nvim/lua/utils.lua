@@ -19,4 +19,8 @@ function utils.set_keymap(opts)
   )
 end
 
+function utils.exe_exists(cmd)
+  return vim.fn.executable(cmd) == 1
+end
+
 return utils

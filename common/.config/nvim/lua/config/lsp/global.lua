@@ -1,5 +1,25 @@
 local utils = require('utils')
 
+local function format_with_prettier(file)
+  if utils.exe_exists("prettierd") then
+    vim.fn.system({ "prettierd", file })
+    return true
+  end
+
+  if utils.exe_exists("prettier") then
+    vim.fn.system({ "prettier", "--write", file })
+    return true
+  end
+
+  if utils.exe_exists("npx") then
+    -- will work when a local prettier exists
+    vim.fn.system({ "npx", "prettier", "--write", file })
+    return true
+  end
+
+  return false
+end
+
 local function set_global_keymaps(client, bufnr)
   -- Restart LSP
   utils.set_keymap({
@@ -145,13 +165,38 @@ local function set_global_keymaps(client, bufnr)
   })
 
   -- Format document
+  -- utils.set_keymap({
+  --   key = '<leader>fa',
+  --   cmd = function()
+  --     vim.lsp.buf.format({ async = true })
+  --   end,
+  --   desc = "Format document",
+  --   bufnr = bufnr,
+  -- })
+
   utils.set_keymap({
-    key = '<leader>fa',
-    cmd = function()
-      vim.lsp.buf.format({ async = true })
-    end,
+    key = "<leader>fa",
     desc = "Format document",
     bufnr = bufnr,
+    cmd = function()
+      local ft = vim.bo.filetype
+      local file = vim.api.nvim_buf_get_name(0)
+
+      -- Use Prettier for formats where you want Prettier's canonical output
+      if ft == "json" or ft == "jsonc" or ft == "yaml" or ft == "yml" then
+        vim.cmd("silent write")
+        local ok = format_with_prettier(file)
+        if ok then
+          vim.cmd("edit!")
+        else
+          vim.notify("No prettier/prettierd/npx found to format this file", vim.log.levels.WARN)
+        end
+        return
+      end
+
+      -- Everything else: whatever LSP formatting you normally use
+      vim.lsp.buf.format({ async = true })
+    end,
   })
 end
 

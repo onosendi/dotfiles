@@ -57,6 +57,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local bufnr = args.buf
 
     if client.name == "typescript" then
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
       set_typescript_keymaps(client, bufnr)
     end
   end
