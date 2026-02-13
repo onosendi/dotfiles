@@ -18,6 +18,7 @@ add_to_path "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 add_to_path "/usr/local/share/python"
 add_to_path "$HOME/.poetry/bin"
 add_to_path "$HOME/homebrew/bin"
+add_to_path "$HOME/.local/bin"
 
 # ---------------------------------
 # Development Environment Variables

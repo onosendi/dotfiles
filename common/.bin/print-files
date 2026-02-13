@@ -15,6 +15,7 @@ log_files() {
             echo -e "\n// $file\n"
             cat "$file"
         done
+
     # If it's a file, process directly (but skip if it's package-lock.json)
     elif [ -f "$path" ] && [[ "$path" != *"package-lock.json" ]]; then
         echo -e "\n// $path\n"

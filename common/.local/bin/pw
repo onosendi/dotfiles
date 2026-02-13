@@ -1,0 +1,43 @@
+#!/bin/bash
+# ~/.local/bin/pass-walker.sh
+
+# Make sure you're logged in first
+if ! pass-cli vault list &>/dev/null; then
+    notify-send "Proton Pass" "Not logged in. Please run: pass-cli login"
+    exit 1
+fi
+
+# Get all vaults and iterate through them to collect items
+items=""
+while IFS=$'\t' read -r vault_name share_id; do
+    # Get items from this vault
+    vault_items=$(pass-cli item list --share-id "$share_id" --output json 2>/dev/null | \
+        jq -r --arg vault "$vault_name" '.items[] | "\(.content.title) (\($vault)) - \(.content.content.Login.username // .content.content.Login.email // "no username")\t\(.id)\t\(.share_id)"')
+    
+    if [ -n "$vault_items" ]; then
+        items="$items$vault_items"$'\n'
+    fi
+done < <(pass-cli vault list --output json | jq -r '.vaults[] | "\(.name)\t\(.share_id)"')
+
+# Remove trailing newline
+items=$(echo "$items" | sed '/^$/d')
+
+# Show in walker and get selection
+selected=$(echo "$items" | walker --dmenu)
+
+if [ -n "$selected" ]; then
+    # Extract item_id and share_id from the selection
+    item_id=$(echo "$selected" | awk -F'\t' '{print $2}')
+    share_id=$(echo "$selected" | awk -F'\t' '{print $3}')
+    
+    # Get the password and copy to clipboard
+    password=$(pass-cli item get --item-id "$item_id" --share-id "$share_id" --output json | \
+        jq -r '.content.content.Login.password')
+    
+    if [ -n "$password" ]; then
+        echo -n "$password" | wl-copy
+        notify-send "Proton Pass" "Password copied to clipboard"
+    else
+        notify-send "Proton Pass" "No password found"
+    fi
+fi
