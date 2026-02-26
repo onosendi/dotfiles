@@ -73,8 +73,15 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
 
 # Aliases
 alias vim="nvim"
-alias copy="wl-copy"
-alias brew="sudo -Hu brew /opt/homebrew/bin/brew"
+case "$OSTYPE" in
+  darwin*)
+    alias copy="pbcopy"
+    ;;
+  linux*)
+    alias copy="wl-copy"
+    ;;
+esac
+# alias brew="sudo -Hu brew /opt/homebrew/bin/brew"
 alias els='eza --group-directories-first --color=always --git'
 alias l='els -l'
 alias ls=els

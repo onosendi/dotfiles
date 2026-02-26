@@ -1,0 +1,14 @@
+general.import = [
+  "~/.config/omarchy/current/theme/alacritty.toml",
+]
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font", style = "Medium" }
+size = 10.25
+
+[window]
+decorations = "None"
+
+[terminal.shell]
+program = "/usr/bin/zsh"
+args = ["-l"]

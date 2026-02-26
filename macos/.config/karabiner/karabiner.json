@@ -1,0 +1,180 @@
+{
+  "profiles": [
+    {
+      "complex_modifications": {
+        "rules": [
+          {
+            "manipulators": [
+              {
+                "description": "Change caps_lock to command+control+option+shift.",
+                "from": {
+                  "key_code": "caps_lock",
+                  "modifiers": { "optional": ["any"] }
+                },
+                "to": [
+                  {
+                    "key_code": "left_shift",
+                    "modifiers": ["left_command", "left_control", "left_option"]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "description": "Hyper app switchers",
+            "manipulators": [
+              {
+                "type": "basic",
+                "description": "Caps+B → Brave",
+                "from": {
+                  "key_code": "b",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_command",
+                      "left_control",
+                      "left_option"
+                    ]
+                  }
+                },
+                "to": [{ "shell_command": "open -a 'Brave Browser'" }]
+              },
+              {
+                "type": "basic",
+                "description": "Caps+B → Thunderbird",
+                "from": {
+                  "key_code": "m",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_command",
+                      "left_control",
+                      "left_option"
+                    ]
+                  }
+                },
+                "to": [{ "shell_command": "open -a 'Thunderbird'" }]
+              },
+              {
+                "type": "basic",
+                "description": "Caps+T → Teams",
+                "from": {
+                  "key_code": "t",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_command",
+                      "left_control",
+                      "left_option"
+                    ]
+                  }
+                },
+                "to": [{ "shell_command": "open -a 'Microsoft Teams'" }]
+              },
+              {
+                "type": "basic",
+                "description": "Caps+T → Obsidian",
+                "from": {
+                  "key_code": "o",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_command",
+                      "left_control",
+                      "left_option"
+                    ]
+                  }
+                },
+                "to": [{ "shell_command": "open -a 'Obsidian'" }]
+              },
+              {
+                "type": "basic",
+                "description": "Caps+G → ChatGPT",
+                "from": {
+                  "key_code": "g",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_command",
+                      "left_control",
+                      "left_option"
+                    ]
+                  }
+                },
+                "to": [{ "shell_command": "open -a 'ChatGPT'" }]
+              },
+              {
+                "type": "basic",
+                "description": "Caps+F → Finder",
+                "from": {
+                  "key_code": "f",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_command",
+                      "left_control",
+                      "left_option"
+                    ]
+                  }
+                },
+                "to": [{ "shell_command": "open -a 'Finder'" }]
+              },
+              {
+                "type": "basic",
+                "description": "Caps+V → Cisco AnyConnect",
+                "from": {
+                  "key_code": "v",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_command",
+                      "left_control",
+                      "left_option"
+                    ]
+                  }
+                },
+                "to": [{ "shell_command": "open -b 'com.cisco.anyconnect.gui'" }]
+              },
+              {
+                "type": "basic",
+                "description": "Caps+I → Alacritty",
+                "from": {
+                  "key_code": "i",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_command",
+                      "left_control",
+                      "left_option"
+                    ]
+                  }
+                },
+                "to": [{ "shell_command": "open -a 'Alacritty'" }]
+              },
+              {
+                "type": "basic",
+                "description": "Caps+P → Proton Pass",
+                "from": {
+                  "key_code": "p",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_shift",
+                      "left_command",
+                      "left_control",
+                      "left_option"
+                    ]
+                  }
+                },
+                "to": [{ "shell_command": "open -a 'Proton Pass'" }]
+              }
+            ]
+          }
+        ]
+      },
+      "name": "Default profile",
+      "selected": true,
+      "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
+    }
+  ]
+}
