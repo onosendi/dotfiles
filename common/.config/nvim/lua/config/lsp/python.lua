@@ -1,24 +1,7 @@
-vim.lsp.config.python = {
-  cmd = { "pyright-langserver", "--stdio" },
+vim.lsp.config.ruff = {
+  cmd = { "ruff", "server" },
   filetypes = { "python" },
-  root_markers = {
-    "pyproject.toml",
-    "setup.py",
-    "setup.cfg",
-    "requirements.txt",
-    "Pipfile",
-    "pyrightconfig.json",
-    ".git",
-  },
-  settings = {
-    python = {
-      analysis = {
-        autoSearchPaths = true,
-        diagnosticMode = "workspace",
-        useLibraryCodeForTypes = true
-      }
-    }
-  }
+  root_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml", ".git" },
 }
 
-vim.lsp.enable("python")
+vim.lsp.enable("ruff")

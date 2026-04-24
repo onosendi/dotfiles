@@ -47,6 +47,11 @@ _G.FormatDocument = function()
     return
   end
 
+  if ft == "python" then
+    vim.lsp.buf.format({ name = "ruff", async = true })
+    return
+  end
+
   vim.lsp.buf.format({ async = true })
 end
 
