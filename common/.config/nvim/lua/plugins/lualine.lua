@@ -9,7 +9,7 @@ return {
         lualine_x = {},
       },
       options = {
-        theme = 'dracula',
+        theme = 'auto',
         component_separators = { '', '' },
       },
       sections = {
