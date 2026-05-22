@@ -1,0 +1,395 @@
+#!/usr/bin/env python3
+
+import argparse
+import os
+import signal
+import subprocess
+import sys
+import tomllib
+from dataclasses import dataclass
+from pathlib import Path
+
+
+SCRIPT_NAME = os.path.basename(sys.argv[0])
+DEFAULT_CONFIG_PATH = (
+    Path(os.environ.get("XDG_CONFIG_HOME", Path.home() / ".config"))
+    / "devtunnel"
+    / "config.toml"
+)
+
+
+@dataclass(frozen=True)
+class Tunnel:
+    description: str
+    local_port: int
+    remote_host: str
+    remote_port: int
+
+
+class ConfigError(Exception):
+    pass
+
+
+TUNNELS: list[Tunnel] = []
+APP_CONFIG: list[tuple[str, list[str]]] = []
+
+
+def require_str(value: object, name: str) -> str:
+    if not isinstance(value, str):
+        raise ConfigError(f"{name} must be a string")
+    return value
+
+
+def require_int(value: object, name: str) -> int:
+    if not isinstance(value, int) or isinstance(value, bool):
+        raise ConfigError(f"{name} must be an integer")
+    return value
+
+
+def load_config(config_path: Path) -> None:
+    global APP_CONFIG, TUNNELS
+
+    try:
+        with config_path.open("rb") as config_file:
+            data = tomllib.load(config_file)
+    except FileNotFoundError as error:
+        raise ConfigError(f"Config file not found: {config_path}") from error
+    except tomllib.TOMLDecodeError as error:
+        raise ConfigError(f"Invalid TOML in {config_path}: {error}") from error
+
+    raw_tunnels = data.get("tunnels")
+    if not isinstance(raw_tunnels, list):
+        raise ConfigError("Config must contain a [[tunnels]] array")
+
+    loaded_tunnels = []
+    for index, raw_tunnel in enumerate(raw_tunnels, start=1):
+        if not isinstance(raw_tunnel, dict):
+            raise ConfigError(f"tunnels[{index}] must be a table")
+        loaded_tunnels.append(
+            Tunnel(
+                require_str(raw_tunnel.get("description"), f"tunnels[{index}].description"),
+                require_int(raw_tunnel.get("local_port"), f"tunnels[{index}].local_port"),
+                require_str(raw_tunnel.get("remote_host"), f"tunnels[{index}].remote_host"),
+                require_int(raw_tunnel.get("remote_port"), f"tunnels[{index}].remote_port"),
+            )
+        )
+
+    raw_apps = data.get("apps")
+    if not isinstance(raw_apps, dict):
+        raise ConfigError("Config must contain an [apps] table")
+
+    loaded_apps = []
+    for app_name, tunnel_names in raw_apps.items():
+        if not isinstance(tunnel_names, list):
+            raise ConfigError(f"apps.{app_name} must be a list")
+        for index, tunnel_name in enumerate(tunnel_names, start=1):
+            if not isinstance(tunnel_name, str):
+                raise ConfigError(f"apps.{app_name}[{index}] must be a string")
+        loaded_apps.append((app_name, tunnel_names))
+
+    TUNNELS = loaded_tunnels
+    APP_CONFIG = loaded_apps
+
+
+def tunnel_by_name() -> dict[str, Tunnel]:
+    return {tunnel.description: tunnel for tunnel in TUNNELS}
+
+
+def apps_by_name() -> dict[str, list[str]]:
+    return {app_name: tunnel_names for app_name, tunnel_names in APP_CONFIG}
+
+
+def available_apps_text() -> str:
+    apps = apps_by_name()
+    if not apps:
+        return "  (none)"
+    return "\n".join(f"  {name}" for name in sorted(apps))
+
+
+def require_valid_config() -> None:
+    if not test_config(quiet=True):
+        print("Cannot continue: configuration has errors", file=sys.stderr)
+        raise SystemExit(1)
+
+
+def get_app_tunnels(app_name: str) -> list[Tunnel]:
+    require_valid_config()
+    apps = apps_by_name()
+
+    if app_name not in apps:
+        print(f"Error: App config not found: {app_name}", file=sys.stderr)
+        print("Available apps:", file=sys.stderr)
+        print(available_apps_text(), file=sys.stderr)
+        raise SystemExit(1)
+
+    tunnels = tunnel_by_name()
+    app_tunnels = []
+    for tunnel_name in apps[app_name]:
+        tunnel = tunnels.get(tunnel_name)
+        if tunnel is None:
+            print(f"Warning: Tunnel not found in config: {tunnel_name}", file=sys.stderr)
+            continue
+        app_tunnels.append(tunnel)
+    return app_tunnels
+
+
+def test_config(quiet: bool = False) -> bool:
+    has_errors = False
+    descriptions: dict[str, Tunnel] = {}
+    local_ports: dict[int, Tunnel] = {}
+    remote_endpoints: dict[tuple[str, int], Tunnel] = {}
+    apps: dict[str, list[str]] = {}
+
+    for tunnel in TUNNELS:
+        previous = descriptions.get(tunnel.description)
+        if previous is not None:
+            print(f"ERROR: Duplicate description: '{tunnel.description}'")
+            has_errors = True
+        descriptions[tunnel.description] = tunnel
+
+        previous = local_ports.get(tunnel.local_port)
+        if previous is not None:
+            print(
+                "ERROR: Duplicate local port: "
+                f"{tunnel.local_port} (used by '{tunnel.description}' and "
+                f"'{previous.description}')"
+            )
+            has_errors = True
+        local_ports[tunnel.local_port] = tunnel
+
+        remote_endpoint = (tunnel.remote_host, tunnel.remote_port)
+        previous = remote_endpoints.get(remote_endpoint)
+        if previous is not None:
+            print(
+                "ERROR: Duplicate remote endpoint: "
+                f"{tunnel.remote_host}:{tunnel.remote_port} (used by "
+                f"'{tunnel.description}' and '{previous.description}')"
+            )
+            has_errors = True
+        remote_endpoints[remote_endpoint] = tunnel
+
+    known_tunnels = set(descriptions)
+    for app_name, tunnel_names in APP_CONFIG:
+        if app_name in apps:
+            print(f"ERROR: Duplicate app: '{app_name}'")
+            has_errors = True
+        apps[app_name] = tunnel_names
+
+        seen_in_app = set()
+        for tunnel_name in tunnel_names:
+            if tunnel_name not in known_tunnels:
+                print(f"ERROR: App '{app_name}' references unknown tunnel: '{tunnel_name}'")
+                has_errors = True
+            if tunnel_name in seen_in_app:
+                print(f"ERROR: App '{app_name}' references tunnel twice: '{tunnel_name}'")
+                has_errors = True
+            seen_in_app.add(tunnel_name)
+
+    if has_errors:
+        if not quiet:
+            print()
+        print("ERROR: Configuration has errors")
+        return False
+
+    if not quiet:
+        print("OK: All tests passed")
+        print(f"  - {len(descriptions)} unique descriptions")
+        print(f"  - {len(local_ports)} unique local ports")
+        print(f"  - {len(remote_endpoints)} unique remote endpoints")
+        print(f"  - {len(apps)} unique apps")
+    return True
+
+
+def list_tunnels() -> None:
+    require_valid_config()
+    print(f"{'Description':<30} {'Local Port':<12} {'Remote Host':<24} {'Remote Port':<12}")
+    print(f"{'-----------':<30} {'----------':<12} {'-----------':<24} {'-----------':<12}")
+    for tunnel in TUNNELS:
+        print(
+            f"{tunnel.description:<30} "
+            f"{tunnel.local_port:<12} "
+            f"{tunnel.remote_host:<24} "
+            f"{tunnel.remote_port:<12}"
+        )
+
+
+def listen_pids(port: int) -> list[int]:
+    result = subprocess.run(
+        ["lsof", "-i", f":{port}", "-sTCP:LISTEN", "-t"],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        return []
+
+    pids = []
+    for line in result.stdout.splitlines():
+        try:
+            pids.append(int(line))
+        except ValueError:
+            continue
+    return pids
+
+
+def port_in_use(port: int) -> bool:
+    return bool(listen_pids(port))
+
+
+def kill_port(port: int) -> bool:
+    pids = listen_pids(port)
+    if not pids:
+        return False
+
+    killed = False
+    for pid in pids:
+        try:
+            os.kill(pid, signal.SIGTERM)
+            killed = True
+        except ProcessLookupError:
+            continue
+        except PermissionError as error:
+            print(f"Could not stop PID {pid} on port {port}: {error}", file=sys.stderr)
+    return killed
+
+
+def start_tunnel(tunnel: Tunnel, server: str) -> bool:
+    result = subprocess.run(
+        [
+            "ssh",
+            "-f",
+            "-N",
+            "-L",
+            f"{tunnel.local_port}:{tunnel.remote_host}:{tunnel.remote_port}",
+            server,
+        ],
+        capture_output=True,
+        text=True,
+    )
+
+    if result.returncode == 0:
+        print("  OK: Started successfully")
+        return True
+
+    print("  ERROR: Failed to start", file=sys.stderr)
+    error_output = result.stderr.strip()
+    if error_output:
+        print(f"     {error_output}", file=sys.stderr)
+    return False
+
+
+def start_app(app_name: str, server: str) -> None:
+    app_tunnels = get_app_tunnels(app_name)
+
+    print(f"Starting tunnels for app: {app_name}")
+    print(f"Using server: {server}")
+    print()
+
+    for tunnel in app_tunnels:
+        if port_in_use(tunnel.local_port):
+            print(f"Skipping: {tunnel.description} (port {tunnel.local_port} already in use)")
+            continue
+
+        print(
+            f"Starting: {tunnel.description} "
+            f"({tunnel.local_port} -> {tunnel.remote_host}:{tunnel.remote_port})"
+        )
+        start_tunnel(tunnel, server)
+
+    print()
+    print(f"All tunnels processed for {app_name}")
+
+
+def stop_tunnels(label: str, tunnels: list[Tunnel]) -> None:
+    print(label)
+    print()
+
+    stopped_count = 0
+    not_running_count = 0
+
+    for tunnel in tunnels:
+        if kill_port(tunnel.local_port):
+            print(f"Stopped: {tunnel.description} (port {tunnel.local_port})")
+            stopped_count += 1
+        else:
+            print(f"Not running: {tunnel.description} (port {tunnel.local_port})")
+            not_running_count += 1
+
+    print()
+    print(f"Summary: {stopped_count} stopped, {not_running_count} not running")
+
+
+def stop_app(app_name: str) -> None:
+    stop_tunnels(f"Stopping tunnels for app: {app_name}", get_app_tunnels(app_name))
+
+
+def restart_app(app_name: str, server: str) -> None:
+    app_tunnels = get_app_tunnels(app_name)
+    stop_tunnels(f"Stopping tunnels for app: {app_name}", app_tunnels)
+    print()
+    print(f"Restarting tunnels for app: {app_name}")
+    print()
+    start_app(app_name, server)
+
+
+def stop_all() -> None:
+    require_valid_config()
+    stop_tunnels("Stopping all tunnels from config", list(TUNNELS))
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog=SCRIPT_NAME,
+        description="Start and stop SSH tunnels for local development.",
+    )
+    parser.add_argument(
+        "--config",
+        type=Path,
+        default=DEFAULT_CONFIG_PATH,
+        help=f"Config file path (default: {DEFAULT_CONFIG_PATH})",
+    )
+    subparsers = parser.add_subparsers(dest="command", required=True)
+
+    start = subparsers.add_parser("start", help="Start tunnels for an app")
+    start.add_argument("app", help="App name")
+    start.add_argument("-s", "--server", default="dev", help="SSH server alias")
+    start.set_defaults(func=lambda args: start_app(args.app, args.server))
+
+    stop = subparsers.add_parser("stop", help="Stop tunnels for an app")
+    stop.add_argument("app", help="App name")
+    stop.set_defaults(func=lambda args: stop_app(args.app))
+
+    restart = subparsers.add_parser("restart", help="Restart tunnels for an app")
+    restart.add_argument("app", help="App name")
+    restart.add_argument("-s", "--server", default="dev", help="SSH server alias")
+    restart.set_defaults(func=lambda args: restart_app(args.app, args.server))
+
+    stop_all_parser = subparsers.add_parser("stop-all", help="Stop all tunnels")
+    stop_all_parser.set_defaults(func=lambda _args: stop_all())
+
+    list_parser = subparsers.add_parser("list", aliases=["l"], help="List all tunnels")
+    list_parser.set_defaults(func=lambda _args: list_tunnels())
+
+    test = subparsers.add_parser("test", aliases=["t"], help="Test configuration")
+    test.add_argument("-q", "--quiet", action="store_true", help="Only print errors")
+    test.set_defaults(func=lambda args: test_config(args.quiet))
+
+    return parser
+
+
+def main() -> int:
+    parser = build_parser()
+    args = parser.parse_args()
+    try:
+        load_config(args.config)
+    except ConfigError as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        return 1
+
+    result = args.func(args)
+    if isinstance(result, bool):
+        return 0 if result else 1
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
