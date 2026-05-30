@@ -213,6 +213,41 @@ def list_tunnels() -> None:
         )
 
 
+def list_apps(app_name: str | None = None) -> None:
+    require_valid_config()
+    apps = apps_by_name()
+    tunnels = tunnel_by_name()
+
+    if app_name is not None:
+        if app_name not in apps:
+            print(f"Error: App config not found: {app_name}", file=sys.stderr)
+            print("Available apps:", file=sys.stderr)
+            print(available_apps_text(), file=sys.stderr)
+            raise SystemExit(1)
+        app_config = [(app_name, apps[app_name])]
+    else:
+        app_config = APP_CONFIG
+
+    for app_index, (current_app_name, tunnel_names) in enumerate(app_config):
+        if app_index > 0:
+            print()
+
+        tunnel_count = len(tunnel_names)
+        tunnel_label = "tunnel" if tunnel_count == 1 else "tunnels"
+        print(f"{current_app_name} ({tunnel_count} {tunnel_label})")
+        print(f"  {'Description':<30} {'Local':<8} {'Remote':<32}")
+        print(f"  {'-----------':<30} {'-----':<8} {'------':<32}")
+
+        for tunnel_name in tunnel_names:
+            tunnel = tunnels[tunnel_name]
+            remote = f"{tunnel.remote_host}:{tunnel.remote_port}"
+            print(
+                f"  {tunnel.description:<30} "
+                f"{tunnel.local_port:<8} "
+                f"{remote:<32}"
+            )
+
+
 def listen_pids(port: int) -> list[int]:
     result = subprocess.run(
         ["lsof", "-i", f":{port}", "-sTCP:LISTEN", "-t"],
@@ -368,6 +403,14 @@ def build_parser() -> argparse.ArgumentParser:
 
     list_parser = subparsers.add_parser("list", aliases=["l"], help="List all tunnels")
     list_parser.set_defaults(func=lambda _args: list_tunnels())
+
+    list_apps_parser = subparsers.add_parser(
+        "list-apps",
+        aliases=["la"],
+        help="List apps and their tunnels",
+    )
+    list_apps_parser.add_argument("-a", "--app", help="Only list tunnels for one app")
+    list_apps_parser.set_defaults(func=lambda args: list_apps(args.app))
 
     test = subparsers.add_parser("test", aliases=["t"], help="Test configuration")
     test.add_argument("-q", "--quiet", action="store_true", help="Only print errors")

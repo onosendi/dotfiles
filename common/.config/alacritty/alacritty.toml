@@ -1,5 +1,6 @@
 general.import = [
   "~/.config/alacritty/platform.toml",
+  "~/.config/alacritty/colorschemes/catppuccin-mocha.toml",
 ]
 
 [env]

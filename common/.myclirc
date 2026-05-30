@@ -57,7 +57,7 @@ post_redirect_command =
 # fruity.
 # Screenshots at http://mycli.net/syntax
 # Can be further modified in [colors]
-syntax_style = monokai
+syntax_style = manni
 
 # Keybindings: Possible values: emacs, vi.
 # Emacs mode: Ctrl-A is home, Ctrl-E is end. All emacs keybindings are available in the REPL.
