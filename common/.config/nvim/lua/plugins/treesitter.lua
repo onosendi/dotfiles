@@ -1,6 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  event = { "BufReadPre", "BufNewFile" },
+  lazy = false,
   build = ":TSUpdate",
   dependencies = {
     {
@@ -11,52 +11,54 @@ return {
     },
   },
   config = function()
-    local treesitter = require("nvim-treesitter.configs")
+    local languages = {
+      "bash",
+      "css",
+      "dockerfile",
+      "gitignore",
+      "haskell",
+      "html",
+      "htmldjango",
+      "javascript",
+      "jsdoc",
+      "json",
+      "lua",
+      "markdown",
+      "markdown_inline",
+      "python",
+      "scss",
+      "sql",
+      "toml",
+      "tsx",
+      "typescript",
+      "vim",
+      "vimdoc",
+      "yaml",
+    }
 
-    treesitter.setup({
-      modules = {},
-      sync_install = false,
-      ignore_install = {},
-      auto_install = true,
-      highlight = {
-        enable = true,
-      },
-      indent = {
-        enable = true,
-      },
-      ensure_installed = {
-        "bash",
-        "css",
-        "dockerfile",
-        "gitignore",
-        "haskell",
-        "html",
-        "htmldjango",
-        "javascript",
-        "jsdoc",
-        "json",
-        "lua",
-        "markdown",
-        "markdown_inline",
-        "python",
-        "scss",
-        "sql",
-        "toml",
-        "tsx",
-        "typescript",
-        "vim",
-        "vimdoc",
-        "yaml",
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
-        },
-      },
+    require("nvim-treesitter").install(languages)
+
+    vim.api.nvim_create_autocmd("FileType", {
+      callback = function()
+        if pcall(vim.treesitter.start) then
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
+      end,
     })
+
+    local select = require("vim.treesitter._select")
+
+    vim.keymap.set("n", "<C-space>", function()
+      vim.cmd.normal({ "v", bang = true })
+      select.select_parent(vim.v.count1)
+    end, { desc = "Start Treesitter selection" })
+
+    vim.keymap.set("x", "<C-space>", function()
+      select.select_parent(vim.v.count1)
+    end, { desc = "Expand Treesitter selection" })
+
+    vim.keymap.set("x", "<BS>", function()
+      select.select_child(vim.v.count1)
+    end, { desc = "Shrink Treesitter selection" })
   end,
 }
