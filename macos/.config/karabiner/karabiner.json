@@ -34,7 +34,7 @@
                                 "type": "basic"
                             },
                             {
-                                "description": "Caps+B → Thunderbird",
+                                "description": "Caps+M → Thunderbird",
                                 "from": {
                                     "key_code": "m",
                                     "modifiers": { "mandatory": ["left_shift", "left_command", "left_control", "left_option"] }
@@ -52,7 +52,7 @@
                                 "type": "basic"
                             },
                             {
-                                "description": "Caps+T → Obsidian",
+                                "description": "Caps+O → Obsidian",
                                 "from": {
                                     "key_code": "o",
                                     "modifiers": { "mandatory": ["left_shift", "left_command", "left_control", "left_option"] }
@@ -61,21 +61,12 @@
                                 "type": "basic"
                             },
                             {
-                                "description": "Caps+G → ChatGPT",
-                                "from": {
-                                    "key_code": "g",
-                                    "modifiers": { "mandatory": ["left_shift", "left_command", "left_control", "left_option"] }
-                                },
-                                "to": [{ "shell_command": "open -a 'ChatGPT'" }],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "Caps+C → Codex",
+                                "description": "Caps+C → Claude",
                                 "from": {
                                     "key_code": "c",
                                     "modifiers": { "mandatory": ["left_shift", "left_command", "left_control", "left_option"] }
                                 },
-                                "to": [{ "shell_command": "open -a 'Codex'" }],
+                                "to": [{ "shell_command": "open -a 'Claude'" }],
                                 "type": "basic"
                             },
                             {
