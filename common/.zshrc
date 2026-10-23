@@ -118,6 +118,9 @@ add-zsh-hook chpwd load-nvmrc
 # Python virtualenvwrapper
 [ -f /opt/homebrew/bin/virtualenvwrapper.sh ] && source /opt/homebrew/bin/virtualenvwrapper.sh
 
+# Zellij IPC sockets need a short path on macOS
+export ZELLIJ_SOCKET_DIR=/tmp/zellij
+
 # ------------------------------------------
 # Path
 # ------------------------------------------
