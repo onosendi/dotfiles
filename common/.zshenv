@@ -12,7 +12,6 @@ add_to_path() {
 }
 
 # Add directories to PATH
-add_to_path "$HOME/.bin"
 add_to_path "$HOME/.android/android-sdk/platform-tools"
 add_to_path "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 add_to_path "/usr/local/share/python"
