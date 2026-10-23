@@ -3,8 +3,8 @@ option_as_alt = "Both"
 decorations = "Buttonless"
 
 [font]
-#size = 12 # docked
-size = 13 # undocked
+size = 12 # docked
+#size = 13 # undocked
 
 [terminal.shell]
 program = "/opt/homebrew/bin/zsh"
